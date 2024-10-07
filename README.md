@@ -85,6 +85,8 @@
 
 ## EF  useful commends
 
+dotnet ef database update
+
 cd ../Data
 
 dotnet ef migrations add v_xxxxxxxx_db --startup-project ../ApiDirectory
