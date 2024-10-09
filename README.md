@@ -52,24 +52,11 @@
     - ILogin
     - IRegister
     - IForgot
-  - ICRUD
+  - IRepo
     - ICreate
     - IRead
     - IUpdate
     - IDelete
-
-- **Entity Layer**
-  - User **(created by Microsoft Identity)**
-  - Role **(created by Microsoft Identity)**
-  - UserRole **(created by Microsoft Identity)**
-  - UserConfirmation
-  - ExceptionLog
-  - Application
-  - Customer
-  - CustomerApplication
-  - Person
-  - BusinessArea
-  - BusinessAreaType
 
 - **Repository Layer**
   - Application
@@ -80,6 +67,18 @@
     - ICRUD
   - Person
     - ICRUD
+  - Entity 
+   - User **(created by Microsoft Identity)**
+   - Role **(created by Microsoft Identity)**
+   - UserRole **(created by Microsoft Identity)**
+   - UserConfirmation
+   - ExceptionLog
+   - Application
+   - Customer
+   - CustomerApplication
+   - Person
+   - BusinessArea
+   - BusinessAreaType
 
 ---
 

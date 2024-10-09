@@ -1,75 +1,128 @@
-﻿using Entity;
-using Microsoft.AspNetCore.Identity;
+﻿using Data.Entity.Auth;
+using Data.Entity.Core;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
     public class DataContext : IdentityDbContext<User, Role, int,
-     IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,
-     IdentityRoleClaim<int>, IdentityUserToken<int>>
+     UserClaim, UserRole,UserLogin,
+     IdentityRoleClaim, IdentityUserToken>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
 
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Application> Applications { get; set; }
+        public DbSet<CustomerApplication> CustomerApplications { get; set; }
+        public DbSet<UserCustomer> UserCustomers { get; set; }
+        public DbSet<BusinessArea> BusinessAreas { get; set; }
+        public DbSet<BusinessAreaType> BusinessAreaTypes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            var adminRole = new Role
+            builder.Entity<User>(entity =>
             {
-                Id = 1,
-                Name = "Admin",
-                NormalizedName = "ADMIN",
-                AlternateId = Guid.NewGuid().ToString()
-            };
-
-            var userRole = new Role
-            {
-                Id = 2,
-                Name = "User",
-                NormalizedName = "USER",
-                AlternateId = Guid.NewGuid().ToString()
-            };
-
-            var hasher = new PasswordHasher<User>();
-
-            var adminUser = new User
-            {
-                Id = 1,
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
-                Email = "admin@mail.com",
-                NormalizedEmail = "ADMIN@MAIL.COM",
-                EmailConfirmed = true,
-                SecurityStamp = string.Empty,
-                AlternateId = Guid.NewGuid().ToString()
-            };
-
-            adminUser.PasswordHash = hasher.HashPassword(adminUser, "AdminPassword123!");
-
-            builder.Entity<Role>().HasData(adminRole, userRole);
-            builder.Entity<User>().HasData(adminUser);
-
-            builder.Entity<UserRole>().HasData(new UserRole
-            {
-                UserId = adminUser.Id,
-                RoleId = adminRole.Id,
-                AlternateId = Guid.NewGuid().ToString()
+                entity.ToTable(name: "asp_net_users");
             });
 
-            builder.Entity<User>()
-                .HasMany(ur => ur.UserRoles)
-                .WithOne(u => u.User)
-                .HasForeignKey(ur => ur.UserId)
-                .IsRequired();
+            builder.Entity<Role>(entity =>
+            {
+                entity.ToTable(name: "asp_net_roles");
+            });
 
-            builder.Entity<Role>()
-                .HasMany(ur => ur.UserRoles)
-                .WithOne(u => u.Role)
-                .HasForeignKey(ur => ur.RoleId)
-                .IsRequired();
+            builder.Entity<UserRole>(entity =>
+            {
+                entity.ToTable("asp_net_user_roles");
+            });
+
+            builder.Entity<UserClaim>(entity =>
+            {
+                entity.ToTable("asp_net_user_claims");
+            });
+
+            builder.Entity<UserLogin>(entity =>
+            {
+                entity.ToTable("asp_net_user_logins");  
+            });
+
+            builder.Entity<IdentityRoleClaim>(entity =>
+            {
+                entity.ToTable("asp_net_role_claims");
+            });
+
+            builder.Entity<IdentityUserToken>(entity =>
+            {
+                entity.ToTable("asp_net_user_tokens");
+            });
+
+            //builder.Entity<User>()
+            //    .HasMany(u => u.UserRoles)
+            //    .WithOne(u => u.User)
+            //    .HasForeignKey(ur => ur.UserId)
+            //    .IsRequired();
+
+            //builder.Entity<Role>()
+            //    .HasMany(r => r.UserRoles)
+            //    .WithOne(r => r.Role)
+            //    .HasForeignKey(r => r.RoleId)
+            //    .IsRequired();
+
+            //builder.Entity<CustomerApplication>(entity =>
+            //{
+
+            //    entity.HasKey(e => e.Id);
+
+            //    entity.HasOne(e => e.Customer)
+            //          .WithMany() 
+            //          .HasForeignKey(e => e.CustomerId)
+            //          .OnDelete(DeleteBehavior.Restrict);
+
+            //    entity.HasOne(e => e.Application)
+            //          .WithMany() 
+            //          .HasForeignKey(e => e.ApplicationId)
+            //          .OnDelete(DeleteBehavior.Restrict); 
+
+            //    entity.HasIndex(e => new { e.CustomerId, e.ApplicationId })
+            //          .IsUnique();
+            //});
+
+            //builder.Entity<User>()
+            //    .HasMany(x => x.UserCustomers)
+            //    .WithOne(x => x.User)
+            //    .HasForeignKey(ur => ur.UserId)
+            //    .IsRequired();
+
+            //builder.Entity<Customer>()
+            //    .HasMany(x => x.UserCustomers)
+            //    .WithOne(x => x.Customer)
+            //    .HasForeignKey(x => x.CustomerId)
+            //    .IsRequired();
+
+
+            //builder.Entity<BusinessAreaTypeRelationship>(entity =>
+            //{
+            //    entity.HasKey(e => e.Id);
+
+            //    entity.HasOne(e => e.BusinessAreaTypeParent)
+            //          .WithMany() 
+            //          .HasForeignKey(e => e.BusinessAreaTypeParentId)
+            //          .OnDelete(DeleteBehavior.Restrict);
+
+            //    entity.HasOne(e => e.BusinessAreaTypeChild)
+            //          .WithMany() 
+            //          .HasForeignKey(e => e.BusinessAreaTypeChildId)
+            //          .OnDelete(DeleteBehavior.Restrict);
+
+            //    entity.HasIndex(e => new { e.BusinessAreaTypeParentId, e.BusinessAreaTypeChildId })
+            //          .IsUnique()
+            //          .HasDatabaseName("UC_BusinessAreaTypeRelationship");
+            //});
+
+
         }
     }
 }
