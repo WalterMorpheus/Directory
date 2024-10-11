@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data.Entity.Auth
 {
     public class IdentityRoleClaim : IdentityRoleClaim<int>
     {
-        public string AlternateId { get; set; }
+        [Required]
+        public Guid AlternateId { get; set; } = Guid.NewGuid();
     }
 }

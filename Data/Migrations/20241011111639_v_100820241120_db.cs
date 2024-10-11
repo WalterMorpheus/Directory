@@ -16,7 +16,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
@@ -36,7 +36,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: true),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
@@ -52,7 +52,8 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: true),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -79,7 +80,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
@@ -99,7 +100,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
@@ -119,7 +120,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: true),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     RoleId = table.Column<int>(type: "integer", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
@@ -141,7 +142,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: true),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
@@ -163,7 +164,7 @@ namespace Data.Migrations
                 {
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     ProviderKey = table.Column<string>(type: "text", nullable: false),
-                    AlternateId = table.Column<string>(type: "text", nullable: true),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -184,7 +185,11 @@ namespace Data.Migrations
                 {
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     RoleId = table.Column<int>(type: "integer", nullable: false),
-                    AlternateId = table.Column<string>(type: "text", nullable: true)
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdateBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -210,7 +215,7 @@ namespace Data.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    AlternateId = table.Column<string>(type: "text", nullable: true),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -225,12 +230,39 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "business_area_type_relationship",
+                columns: table => new
+                {
+                    ParentTypeId = table.Column<int>(type: "integer", nullable: false),
+                    ChildTypeId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_business_area_type_relationship", x => new { x.ParentTypeId, x.ChildTypeId });
+                    table.ForeignKey(
+                        name: "FK_business_area_type_relationship_business_area_type_ChildTyp~",
+                        column: x => x.ChildTypeId,
+                        principalTable: "business_area_type",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_business_area_type_relationship_business_area_type_ParentTy~",
+                        column: x => x.ParentTypeId,
+                        principalTable: "business_area_type",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "business_area",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
                     BusinessAreaTypeId = table.Column<int>(type: "integer", nullable: false),
@@ -262,17 +294,15 @@ namespace Data.Migrations
                 name: "customer_application",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: false),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
                     ApplicationId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_customer_application", x => x.Id);
+                    table.PrimaryKey("PK_customer_application", x => new { x.CustomerId, x.ApplicationId });
                     table.ForeignKey(
                         name: "FK_customer_application_application_ApplicationId",
                         column: x => x.ApplicationId,
@@ -288,12 +318,41 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "person",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    CellPhoneNum = table.Column<string>(type: "text", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdateBy = table.Column<string>(type: "text", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CustomerId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_person", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_person_customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "user_customer",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -315,6 +374,110 @@ namespace Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "business_area_relationship",
+                columns: table => new
+                {
+                    ParentBusinessAreaId = table.Column<int>(type: "integer", nullable: false),
+                    ChildBusinessAreaId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_business_area_relationship", x => new { x.ParentBusinessAreaId, x.ChildBusinessAreaId });
+                    table.ForeignKey(
+                        name: "FK_business_area_relationship_business_area_ChildBusinessAreaId",
+                        column: x => x.ChildBusinessAreaId,
+                        principalTable: "business_area",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_business_area_relationship_business_area_ParentBusinessArea~",
+                        column: x => x.ParentBusinessAreaId,
+                        principalTable: "business_area",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "customer_business_area",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "integer", nullable: false),
+                    BusinessAreaId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_customer_business_area", x => new { x.CustomerId, x.BusinessAreaId });
+                    table.ForeignKey(
+                        name: "FK_customer_business_area_business_area_BusinessAreaId",
+                        column: x => x.BusinessAreaId,
+                        principalTable: "business_area",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_customer_business_area_customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "person_business_area",
+                columns: table => new
+                {
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    BusinessAreaId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_person_business_area", x => new { x.PersonId, x.BusinessAreaId });
+                    table.ForeignKey(
+                        name: "FK_person_business_area_business_area_BusinessAreaId",
+                        column: x => x.BusinessAreaId,
+                        principalTable: "business_area",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_person_business_area_person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "asp_net_roles",
+                columns: new[] { "Id", "AlternateId", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, new Guid("7d252497-bce3-48ff-a7f7-ae0434a4af81"), "647f5dcc-702f-4984-916d-bf36f372f6f9", "Admin", "ADMIN" },
+                    { 2, new Guid("8335baa7-df13-499b-bae4-2ed56453e310"), "f5d8a582-13bd-4a5a-87f9-ff6f87809595", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "asp_net_users",
+                columns: new[] { "Id", "AccessFailedCount", "AlternateId", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, new Guid("35688e01-cb32-45be-af26-a6d323dfabd1"), "f49d5ec7-e477-4d3b-8aa3-83964ac269d3", new DateTime(2024, 10, 11, 11, 16, 38, 906, DateTimeKind.Utc).AddTicks(4676), "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEFiDghaK9QO7RqWBG2jdJIZ0Ak82xwkC9uSROnVfC6z+IL0m30+/Ae5i5pXOSVsCbQ==", null, false, "", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "asp_net_user_roles",
+                columns: new[] { "RoleId", "UserId", "AlternateId", "CreatedBy", "CreatedDate", "UpdateBy", "UpdateDate" },
+                values: new object[] { 1, 1, new Guid("7c8d81ae-3966-4358-864e-6b10a05f06fd"), "migrations", new DateTime(2024, 10, 11, 11, 16, 38, 912, DateTimeKind.Utc).AddTicks(1315), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_application_Name",
+                table: "application",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_asp_net_role_claims_RoleId",
@@ -364,15 +527,46 @@ namespace Data.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_business_area_relationship_ChildBusinessAreaId",
+                table: "business_area_relationship",
+                column: "ChildBusinessAreaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_business_area_type_Name",
+                table: "business_area_type",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_business_area_type_relationship_ChildTypeId",
+                table: "business_area_type_relationship",
+                column: "ChildTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_customer_Name",
+                table: "customer",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_customer_application_ApplicationId",
                 table: "customer_application",
                 column: "ApplicationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_customer_application_CustomerId_ApplicationId",
-                table: "customer_application",
-                columns: new[] { "CustomerId", "ApplicationId" },
-                unique: true);
+                name: "IX_customer_business_area_BusinessAreaId",
+                table: "customer_business_area",
+                column: "BusinessAreaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_person_CustomerId",
+                table: "person",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_person_business_area_BusinessAreaId",
+                table: "person_business_area",
+                column: "BusinessAreaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_user_customer_CustomerId",
@@ -403,10 +597,19 @@ namespace Data.Migrations
                 name: "asp_net_user_tokens");
 
             migrationBuilder.DropTable(
-                name: "business_area");
+                name: "business_area_relationship");
+
+            migrationBuilder.DropTable(
+                name: "business_area_type_relationship");
 
             migrationBuilder.DropTable(
                 name: "customer_application");
+
+            migrationBuilder.DropTable(
+                name: "customer_business_area");
+
+            migrationBuilder.DropTable(
+                name: "person_business_area");
 
             migrationBuilder.DropTable(
                 name: "user_customer");
@@ -415,13 +618,19 @@ namespace Data.Migrations
                 name: "asp_net_roles");
 
             migrationBuilder.DropTable(
-                name: "business_area_type");
-
-            migrationBuilder.DropTable(
                 name: "application");
 
             migrationBuilder.DropTable(
+                name: "business_area");
+
+            migrationBuilder.DropTable(
+                name: "person");
+
+            migrationBuilder.DropTable(
                 name: "asp_net_users");
+
+            migrationBuilder.DropTable(
+                name: "business_area_type");
 
             migrationBuilder.DropTable(
                 name: "customer");

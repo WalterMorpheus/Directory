@@ -10,11 +10,9 @@ namespace Data.Entity.Core
         [Key]
         public int Id { get; set; }
         [Required]
-        [ForeignKey("UserId")]
         public int UserId { get; set; }
         public User User { get; set; }
         [Required]
-        [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         [Required]

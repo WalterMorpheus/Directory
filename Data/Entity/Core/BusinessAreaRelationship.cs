@@ -3,22 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entity.Core
 {
-    [Table("customer_application")]
-    public class CustomerApplication
+    [Table("business_area_relationship")]
+    public class BusinessAreaRelationship
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public int ParentBusinessAreaId { get; set; }
+        public BusinessArea ParentBusinessArea { get; set; }
         [Required]
-        public int ApplicationId { get; set; }
-        public Application Application { get; set; }
+        public int ChildBusinessAreaId { get; set; }
+        public BusinessArea ChildBusinessArea { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]
         public string CreatedBy { get; set; }
-
-
     }
 }

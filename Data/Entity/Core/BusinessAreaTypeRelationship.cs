@@ -1,5 +1,4 @@
-﻿using Data.Entity.Auth;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entity.Core
@@ -10,12 +9,11 @@ namespace Data.Entity.Core
         [Key]
         public int Id { get; set; }
         [Required]
-        public int BusinessAreaTypeParentId { get; set; }
-        public virtual BusinessAreaType BusinessAreaTypeParent { get; set; }
+        public int ParentTypeId { get; set; }
+        public virtual BusinessAreaType ParentType { get; set; }
         [Required]
-        public int BusinessAreaTypeChildId { get; set; }
-        public virtual BusinessAreaType BusinessAreaTypeChild { get; set; }
-  
+        public int ChildTypeId { get; set; }
+        public virtual BusinessAreaType ChildType { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]

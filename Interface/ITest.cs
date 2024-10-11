@@ -8,6 +8,6 @@ namespace Interface
 {
     public interface ITest
     {
-        bool connection();
+        Task<dynamic> ConnectionAsync();
     }
 }

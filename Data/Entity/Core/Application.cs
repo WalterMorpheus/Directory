@@ -9,7 +9,7 @@ namespace Data.Entity.Core
         [Key]
         public int Id { get; set; }
         [Required]
-        public string AlternateId { get; set; } = Guid.NewGuid().ToString();
+        public Guid AlternateId { get; set; } = Guid.NewGuid();
         [Required]
         public string Name { get; set; }
         [Required]
@@ -23,3 +23,5 @@ namespace Data.Entity.Core
         public ICollection<CustomerApplication> CustomerApplications { get; set; }
     }
 }
+
+

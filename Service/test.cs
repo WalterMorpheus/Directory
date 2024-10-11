@@ -1,20 +1,29 @@
-﻿using Data;
+﻿using Data.Entity.Auth;
 using Interface;
 
 namespace Service
 {
-    public class Test: ITest
+    public class Test : ITest
     {
-        private readonly DataContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IGenericService<User, int> _userService;
 
-        public Test(DataContext context)
+        public Test(IUnitOfWork unitOfWork, IGenericService<User, int> userService)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
+            _userService = userService;
+
         }
-
-        public bool connection()
-        {
-            return _context.Database.CanConnect();
+        public async Task<dynamic> ConnectionAsync()
+        {           
+            try
+            {
+                return await _userService.GetByIdAsync(1);
+            }
+            catch (Exception)
+            {
+                return new {};
+            }
         }
     }
 }

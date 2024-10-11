@@ -24,10 +24,10 @@ namespace ApiDirectory.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
 
-            var result = _testService.connection();
+            var result = await _testService.ConnectionAsync();
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

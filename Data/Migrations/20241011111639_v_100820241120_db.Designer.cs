@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241009140603_v_100820241120_db")]
+    [Migration("20241011111639_v_100820241120_db")]
     partial class v_100820241120_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,8 +32,8 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AlternateId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -62,8 +62,8 @@ namespace Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("AlternateId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
@@ -81,8 +81,8 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AlternateId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -103,6 +103,24 @@ namespace Data.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("asp_net_roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlternateId = new Guid("7d252497-bce3-48ff-a7f7-ae0434a4af81"),
+                            ConcurrencyStamp = "647f5dcc-702f-4984-916d-bf36f372f6f9",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AlternateId = new Guid("8335baa7-df13-499b-bae4-2ed56453e310"),
+                            ConcurrencyStamp = "f5d8a582-13bd-4a5a-87f9-ff6f87809595",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Data.Entity.Auth.User", b =>
@@ -116,12 +134,15 @@ namespace Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("AlternateId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -173,6 +194,26 @@ namespace Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("asp_net_users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            AlternateId = new Guid("35688e01-cb32-45be-af26-a6d323dfabd1"),
+                            ConcurrencyStamp = "f49d5ec7-e477-4d3b-8aa3-83964ac269d3",
+                            CreatedDate = new DateTime(2024, 10, 11, 11, 16, 38, 906, DateTimeKind.Utc).AddTicks(4676),
+                            Email = "admin@mail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFiDghaK9QO7RqWBG2jdJIZ0Ak82xwkC9uSROnVfC6z+IL0m30+/Ae5i5pXOSVsCbQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Data.Entity.Auth.UserClaim", b =>
@@ -183,8 +224,8 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AlternateId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -210,8 +251,8 @@ namespace Data.Migrations
                     b.Property<string>("ProviderKey")
                         .HasColumnType("text");
 
-                    b.Property<string>("AlternateId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
@@ -234,14 +275,38 @@ namespace Data.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("AlternateId")
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("asp_net_user_roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1,
+                            AlternateId = new Guid("7c8d81ae-3966-4358-864e-6b10a05f06fd"),
+                            CreatedBy = "migrations",
+                            CreatedDate = new DateTime(2024, 10, 11, 11, 16, 38, 912, DateTimeKind.Utc).AddTicks(1315),
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Data.Entity.Core.Application", b =>
@@ -252,9 +317,8 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AlternateId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -281,6 +345,9 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("application");
                 });
 
@@ -292,9 +359,8 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AlternateId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("BusinessAreaTypeId")
                         .HasColumnType("integer");
@@ -334,6 +400,31 @@ namespace Data.Migrations
                     b.ToTable("business_area");
                 });
 
+            modelBuilder.Entity("Data.Entity.Core.BusinessAreaRelationship", b =>
+                {
+                    b.Property<int>("ParentBusinessAreaId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ChildBusinessAreaId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ParentBusinessAreaId", "ChildBusinessAreaId");
+
+                    b.HasIndex("ChildBusinessAreaId");
+
+                    b.ToTable("business_area_relationship");
+                });
+
             modelBuilder.Entity("Data.Entity.Core.BusinessAreaType", b =>
                 {
                     b.Property<int>("Id")
@@ -342,9 +433,8 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AlternateId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -371,7 +461,35 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("business_area_type");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.BusinessAreaTypeRelationship", b =>
+                {
+                    b.Property<int>("ParentTypeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ChildTypeId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ParentTypeId", "ChildTypeId");
+
+                    b.HasIndex("ChildTypeId");
+
+                    b.ToTable("business_area_type_relationship");
                 });
 
             modelBuilder.Entity("Data.Entity.Core.Customer", b =>
@@ -382,9 +500,8 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AlternateId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -411,20 +528,16 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("customer");
                 });
 
             modelBuilder.Entity("Data.Entity.Core.CustomerApplication", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("CustomerId")
                         .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AlternateId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<int>("ApplicationId")
                         .HasColumnType("integer");
@@ -436,17 +549,113 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("Id")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("CustomerId", "ApplicationId");
 
                     b.HasIndex("ApplicationId");
 
-                    b.HasIndex("CustomerId", "ApplicationId")
-                        .IsUnique();
-
                     b.ToTable("customer_application");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.CustomerBusinessArea", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("BusinessAreaId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CustomerId", "BusinessAreaId");
+
+                    b.HasIndex("BusinessAreaId");
+
+                    b.ToTable("customer_business_area");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.Person", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("AlternateId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CellPhoneNum")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DeleteDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("person");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.PersonBusinessArea", b =>
+                {
+                    b.Property<int>("PersonId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("BusinessAreaId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("PersonId", "BusinessAreaId");
+
+                    b.HasIndex("BusinessAreaId");
+
+                    b.ToTable("person_business_area");
                 });
 
             modelBuilder.Entity("Data.Entity.Core.UserCustomer", b =>
@@ -456,10 +665,6 @@ namespace Data.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AlternateId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -541,13 +746,13 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entity.Core.BusinessArea", b =>
                 {
                     b.HasOne("Data.Entity.Core.BusinessAreaType", "BusinessAreaType")
-                        .WithMany()
+                        .WithMany("BusinessAreas")
                         .HasForeignKey("BusinessAreaTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Data.Entity.Core.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("BusinessAreas")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -555,6 +760,44 @@ namespace Data.Migrations
                     b.Navigation("BusinessAreaType");
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.BusinessAreaRelationship", b =>
+                {
+                    b.HasOne("Data.Entity.Core.BusinessArea", "ChildBusinessArea")
+                        .WithMany("ChildRelationships")
+                        .HasForeignKey("ChildBusinessAreaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entity.Core.BusinessArea", "ParentBusinessArea")
+                        .WithMany("ParentRelationships")
+                        .HasForeignKey("ParentBusinessAreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChildBusinessArea");
+
+                    b.Navigation("ParentBusinessArea");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.BusinessAreaTypeRelationship", b =>
+                {
+                    b.HasOne("Data.Entity.Core.BusinessAreaType", "ChildType")
+                        .WithMany("ChildRelationships")
+                        .HasForeignKey("ChildTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entity.Core.BusinessAreaType", "ParentType")
+                        .WithMany("ParentRelationships")
+                        .HasForeignKey("ParentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChildType");
+
+                    b.Navigation("ParentType");
                 });
 
             modelBuilder.Entity("Data.Entity.Core.CustomerApplication", b =>
@@ -574,6 +817,55 @@ namespace Data.Migrations
                     b.Navigation("Application");
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.CustomerBusinessArea", b =>
+                {
+                    b.HasOne("Data.Entity.Core.BusinessArea", "BusinessArea")
+                        .WithMany("CustomerBusinessAreas")
+                        .HasForeignKey("BusinessAreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entity.Core.Customer", "Customer")
+                        .WithMany("CustomerBusinessAreas")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BusinessArea");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.Person", b =>
+                {
+                    b.HasOne("Data.Entity.Core.Customer", "Customer")
+                        .WithMany("People")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.PersonBusinessArea", b =>
+                {
+                    b.HasOne("Data.Entity.Core.BusinessArea", "BusinessArea")
+                        .WithMany("PersonBusinessAreas")
+                        .HasForeignKey("BusinessAreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entity.Core.Person", "Person")
+                        .WithMany("PersonBusinessAreas")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BusinessArea");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Data.Entity.Core.UserCustomer", b =>
@@ -612,11 +904,42 @@ namespace Data.Migrations
                     b.Navigation("CustomerApplications");
                 });
 
+            modelBuilder.Entity("Data.Entity.Core.BusinessArea", b =>
+                {
+                    b.Navigation("ChildRelationships");
+
+                    b.Navigation("CustomerBusinessAreas");
+
+                    b.Navigation("ParentRelationships");
+
+                    b.Navigation("PersonBusinessAreas");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.BusinessAreaType", b =>
+                {
+                    b.Navigation("BusinessAreas");
+
+                    b.Navigation("ChildRelationships");
+
+                    b.Navigation("ParentRelationships");
+                });
+
             modelBuilder.Entity("Data.Entity.Core.Customer", b =>
                 {
+                    b.Navigation("BusinessAreas");
+
                     b.Navigation("CustomerApplications");
 
+                    b.Navigation("CustomerBusinessAreas");
+
+                    b.Navigation("People");
+
                     b.Navigation("UserCustomers");
+                });
+
+            modelBuilder.Entity("Data.Entity.Core.Person", b =>
+                {
+                    b.Navigation("PersonBusinessAreas");
                 });
 #pragma warning restore 612, 618
         }

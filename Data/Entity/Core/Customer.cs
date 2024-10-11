@@ -9,7 +9,7 @@ namespace Data.Entity.Core
         [Key]
         public int Id { get; set; }
         [Required]
-        public string AlternateId { get; set; } = Guid.NewGuid().ToString();
+        public Guid AlternateId { get; set; } = Guid.NewGuid();
         [Required]
         public string Name { get; set; }
         [Required]
@@ -21,6 +21,9 @@ namespace Data.Entity.Core
         public bool IsDeleted { get; set; }
         public DateTime DeleteDate { get; set; }
         public ICollection<CustomerApplication> CustomerApplications { get; set; }
+        public ICollection<BusinessArea> BusinessAreas { get; set; }
+        public ICollection<CustomerBusinessArea> CustomerBusinessAreas { get; set; }
         public ICollection<UserCustomer> UserCustomers { get; set; }
+        public ICollection<Person> People { get; set; }
     }
 }
