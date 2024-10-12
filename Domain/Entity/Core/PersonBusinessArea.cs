@@ -1,24 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Entity.Core
+namespace Domain.Entity.Core
 {
-    [Table("customer_application")]
-    public class CustomerApplication
+    [Table("person_business_area")]
+    public class PersonBusinessArea
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
         [Required]
-        public int ApplicationId { get; set; }
-        public Application Application { get; set; }
+        public int BusinessAreaId { get; set; }
+        public BusinessArea BusinessArea { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]
         public string CreatedBy { get; set; }
-
-
     }
 }

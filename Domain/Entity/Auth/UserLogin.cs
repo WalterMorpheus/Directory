@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Entity.Auth
+namespace Domain.Entity.Auth
 {
     public class UserLogin : IdentityUserLogin<int>
     {

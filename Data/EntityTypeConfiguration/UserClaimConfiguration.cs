@@ -1,8 +1,8 @@
-﻿using Data.Entity.Auth;
+﻿using Domain.Entity.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.entityTypeConfiguration
+namespace Data.EntityTypeConfiguration
 {
     public class UserClaimConfiguration : IEntityTypeConfiguration<UserClaim>
     {

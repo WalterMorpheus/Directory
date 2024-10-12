@@ -1,4 +1,4 @@
-﻿using Data.Entity.Auth;
+﻿using Domain.Entity.Auth;
 using Interface;
 
 namespace Service

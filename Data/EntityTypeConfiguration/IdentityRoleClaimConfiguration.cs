@@ -1,7 +1,6 @@
-﻿using Data.Entity.Auth;
+﻿using Domain.Entity.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 
 namespace Data.EntityTypeConfiguration
 {

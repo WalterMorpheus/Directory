@@ -1,8 +1,8 @@
-﻿using Data.Entity.Core;
+﻿using Domain.Entity.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.entityTypeConfiguration
+namespace Data.EntityTypeConfiguration
 {
     public class PersonConfiguration : IEntityTypeConfiguration<Person>
     {

@@ -1,9 +1,8 @@
-﻿using Data.Entity.Core;
+﻿using Domain.Entity.Core;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Entity.Auth
+namespace Domain.Entity.Auth
 {
     public class User : IdentityUser<int>
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Entity.Core
+namespace Domain.Entity.Core
 {
     [Table("business_area_relationship")]
     public class BusinessAreaRelationship

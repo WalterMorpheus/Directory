@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241011111639_v_100820241120_db")]
-    partial class v_100820241120_db
+    [Migration("20241012101845_v_10401062024_db")]
+    partial class v_10401062024_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Data.Entity.Auth.IdentityRoleClaim", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.IdentityRoleClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace Data.Migrations
                     b.ToTable("asp_net_role_claims", (string)null);
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.IdentityUserToken", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.IdentityUserToken", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
@@ -73,7 +73,7 @@ namespace Data.Migrations
                     b.ToTable("asp_net_user_tokens", (string)null);
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.Role", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,22 +108,22 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("7d252497-bce3-48ff-a7f7-ae0434a4af81"),
-                            ConcurrencyStamp = "647f5dcc-702f-4984-916d-bf36f372f6f9",
+                            AlternateId = new Guid("9c62892c-e606-4dea-997a-0e55face12e9"),
+                            ConcurrencyStamp = "7c109631-1a61-4dac-b61a-494f5ac50c0b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("8335baa7-df13-499b-bae4-2ed56453e310"),
-                            ConcurrencyStamp = "f5d8a582-13bd-4a5a-87f9-ff6f87809595",
+                            AlternateId = new Guid("2bdfed30-257c-4423-bb14-67f9581eeb87"),
+                            ConcurrencyStamp = "b82d9f6a-e63c-419b-a31c-b857b6f0a300",
                             Name = "User",
                             NormalizedName = "USER"
                         });
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.User", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,15 +200,15 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            AlternateId = new Guid("35688e01-cb32-45be-af26-a6d323dfabd1"),
-                            ConcurrencyStamp = "f49d5ec7-e477-4d3b-8aa3-83964ac269d3",
-                            CreatedDate = new DateTime(2024, 10, 11, 11, 16, 38, 906, DateTimeKind.Utc).AddTicks(4676),
+                            AlternateId = new Guid("02a7d6fb-fcb0-4663-9811-ac4e537ffc6e"),
+                            ConcurrencyStamp = "9c6f5c73-17eb-49fc-85a8-0f5884e2afdd",
+                            CreatedDate = new DateTime(2024, 10, 12, 10, 18, 44, 839, DateTimeKind.Utc).AddTicks(4194),
                             Email = "admin@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFiDghaK9QO7RqWBG2jdJIZ0Ak82xwkC9uSROnVfC6z+IL0m30+/Ae5i5pXOSVsCbQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIDKeUODvvqzSyzMZTK2+vKSjdH1e4Ax/MYBg7k16WT6a/IoxGyJra/becCGPFxRHg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -216,7 +216,7 @@ namespace Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.UserClaim", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.UserClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -243,7 +243,7 @@ namespace Data.Migrations
                     b.ToTable("asp_net_user_claims", (string)null);
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.UserLogin", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.UserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -267,7 +267,7 @@ namespace Data.Migrations
                     b.ToTable("asp_net_user_logins", (string)null);
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.UserRole", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.UserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
@@ -302,14 +302,14 @@ namespace Data.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-                            AlternateId = new Guid("7c8d81ae-3966-4358-864e-6b10a05f06fd"),
-                            CreatedBy = "migrations",
-                            CreatedDate = new DateTime(2024, 10, 11, 11, 16, 38, 912, DateTimeKind.Utc).AddTicks(1315),
+                            AlternateId = new Guid("81b6ca47-2f36-4e2f-ad33-b82de463189c"),
+                            CreatedBy = "hkhkhikkhg",
+                            CreatedDate = new DateTime(2024, 10, 12, 10, 18, 44, 848, DateTimeKind.Utc).AddTicks(515),
                             UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.Application", b =>
+            modelBuilder.Entity("Domain.Entity.Core.Application", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,7 +351,7 @@ namespace Data.Migrations
                     b.ToTable("application");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessArea", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessArea", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -400,7 +400,7 @@ namespace Data.Migrations
                     b.ToTable("business_area");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessAreaRelationship", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessAreaRelationship", b =>
                 {
                     b.Property<int>("ParentBusinessAreaId")
                         .HasColumnType("integer");
@@ -425,7 +425,7 @@ namespace Data.Migrations
                     b.ToTable("business_area_relationship");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessAreaType", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessAreaType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -467,7 +467,7 @@ namespace Data.Migrations
                     b.ToTable("business_area_type");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessAreaTypeRelationship", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessAreaTypeRelationship", b =>
                 {
                     b.Property<int>("ParentTypeId")
                         .HasColumnType("integer");
@@ -492,7 +492,7 @@ namespace Data.Migrations
                     b.ToTable("business_area_type_relationship");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.Customer", b =>
+            modelBuilder.Entity("Domain.Entity.Core.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -534,7 +534,7 @@ namespace Data.Migrations
                     b.ToTable("customer");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.CustomerApplication", b =>
+            modelBuilder.Entity("Domain.Entity.Core.CustomerApplication", b =>
                 {
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
@@ -559,7 +559,7 @@ namespace Data.Migrations
                     b.ToTable("customer_application");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.CustomerBusinessArea", b =>
+            modelBuilder.Entity("Domain.Entity.Core.CustomerBusinessArea", b =>
                 {
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
@@ -577,7 +577,7 @@ namespace Data.Migrations
                     b.ToTable("customer_business_area");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.Person", b =>
+            modelBuilder.Entity("Domain.Entity.Core.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -633,7 +633,7 @@ namespace Data.Migrations
                     b.ToTable("person");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.PersonBusinessArea", b =>
+            modelBuilder.Entity("Domain.Entity.Core.PersonBusinessArea", b =>
                 {
                     b.Property<int>("PersonId")
                         .HasColumnType("integer");
@@ -658,7 +658,7 @@ namespace Data.Migrations
                     b.ToTable("person_business_area");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.UserCustomer", b =>
+            modelBuilder.Entity("Domain.Entity.Core.UserCustomer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -688,51 +688,51 @@ namespace Data.Migrations
                     b.ToTable("user_customer");
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.IdentityRoleClaim", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.IdentityRoleClaim", b =>
                 {
-                    b.HasOne("Data.Entity.Auth.Role", null)
+                    b.HasOne("Domain.Entity.Auth.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.IdentityUserToken", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.IdentityUserToken", b =>
                 {
-                    b.HasOne("Data.Entity.Auth.User", null)
+                    b.HasOne("Domain.Entity.Auth.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.UserClaim", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.UserClaim", b =>
                 {
-                    b.HasOne("Data.Entity.Auth.User", null)
+                    b.HasOne("Domain.Entity.Auth.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.UserLogin", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.UserLogin", b =>
                 {
-                    b.HasOne("Data.Entity.Auth.User", null)
+                    b.HasOne("Domain.Entity.Auth.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.UserRole", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.UserRole", b =>
                 {
-                    b.HasOne("Data.Entity.Auth.Role", "Role")
+                    b.HasOne("Domain.Entity.Auth.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Auth.User", "User")
+                    b.HasOne("Domain.Entity.Auth.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -743,15 +743,15 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessArea", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessArea", b =>
                 {
-                    b.HasOne("Data.Entity.Core.BusinessAreaType", "BusinessAreaType")
+                    b.HasOne("Domain.Entity.Core.BusinessAreaType", "BusinessAreaType")
                         .WithMany("BusinessAreas")
                         .HasForeignKey("BusinessAreaTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Core.Customer", "Customer")
+                    b.HasOne("Domain.Entity.Core.Customer", "Customer")
                         .WithMany("BusinessAreas")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -762,15 +762,15 @@ namespace Data.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessAreaRelationship", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessAreaRelationship", b =>
                 {
-                    b.HasOne("Data.Entity.Core.BusinessArea", "ChildBusinessArea")
+                    b.HasOne("Domain.Entity.Core.BusinessArea", "ChildBusinessArea")
                         .WithMany("ChildRelationships")
                         .HasForeignKey("ChildBusinessAreaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Core.BusinessArea", "ParentBusinessArea")
+                    b.HasOne("Domain.Entity.Core.BusinessArea", "ParentBusinessArea")
                         .WithMany("ParentRelationships")
                         .HasForeignKey("ParentBusinessAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -781,15 +781,15 @@ namespace Data.Migrations
                     b.Navigation("ParentBusinessArea");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessAreaTypeRelationship", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessAreaTypeRelationship", b =>
                 {
-                    b.HasOne("Data.Entity.Core.BusinessAreaType", "ChildType")
+                    b.HasOne("Domain.Entity.Core.BusinessAreaType", "ChildType")
                         .WithMany("ChildRelationships")
                         .HasForeignKey("ChildTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Core.BusinessAreaType", "ParentType")
+                    b.HasOne("Domain.Entity.Core.BusinessAreaType", "ParentType")
                         .WithMany("ParentRelationships")
                         .HasForeignKey("ParentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -800,15 +800,15 @@ namespace Data.Migrations
                     b.Navigation("ParentType");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.CustomerApplication", b =>
+            modelBuilder.Entity("Domain.Entity.Core.CustomerApplication", b =>
                 {
-                    b.HasOne("Data.Entity.Core.Application", "Application")
+                    b.HasOne("Domain.Entity.Core.Application", "Application")
                         .WithMany("CustomerApplications")
                         .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Core.Customer", "Customer")
+                    b.HasOne("Domain.Entity.Core.Customer", "Customer")
                         .WithMany("CustomerApplications")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -819,15 +819,15 @@ namespace Data.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.CustomerBusinessArea", b =>
+            modelBuilder.Entity("Domain.Entity.Core.CustomerBusinessArea", b =>
                 {
-                    b.HasOne("Data.Entity.Core.BusinessArea", "BusinessArea")
+                    b.HasOne("Domain.Entity.Core.BusinessArea", "BusinessArea")
                         .WithMany("CustomerBusinessAreas")
                         .HasForeignKey("BusinessAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Core.Customer", "Customer")
+                    b.HasOne("Domain.Entity.Core.Customer", "Customer")
                         .WithMany("CustomerBusinessAreas")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -838,9 +838,9 @@ namespace Data.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.Person", b =>
+            modelBuilder.Entity("Domain.Entity.Core.Person", b =>
                 {
-                    b.HasOne("Data.Entity.Core.Customer", "Customer")
+                    b.HasOne("Domain.Entity.Core.Customer", "Customer")
                         .WithMany("People")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -849,15 +849,15 @@ namespace Data.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.PersonBusinessArea", b =>
+            modelBuilder.Entity("Domain.Entity.Core.PersonBusinessArea", b =>
                 {
-                    b.HasOne("Data.Entity.Core.BusinessArea", "BusinessArea")
+                    b.HasOne("Domain.Entity.Core.BusinessArea", "BusinessArea")
                         .WithMany("PersonBusinessAreas")
                         .HasForeignKey("BusinessAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Core.Person", "Person")
+                    b.HasOne("Domain.Entity.Core.Person", "Person")
                         .WithMany("PersonBusinessAreas")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -868,15 +868,15 @@ namespace Data.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.UserCustomer", b =>
+            modelBuilder.Entity("Domain.Entity.Core.UserCustomer", b =>
                 {
-                    b.HasOne("Data.Entity.Core.Customer", "Customer")
+                    b.HasOne("Domain.Entity.Core.Customer", "Customer")
                         .WithMany("UserCustomers")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Auth.User", "User")
+                    b.HasOne("Domain.Entity.Auth.User", "User")
                         .WithMany("UserCustomers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -887,24 +887,24 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.Role", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.Role", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("Data.Entity.Auth.User", b =>
+            modelBuilder.Entity("Domain.Entity.Auth.User", b =>
                 {
                     b.Navigation("UserCustomers");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.Application", b =>
+            modelBuilder.Entity("Domain.Entity.Core.Application", b =>
                 {
                     b.Navigation("CustomerApplications");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessArea", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessArea", b =>
                 {
                     b.Navigation("ChildRelationships");
 
@@ -915,7 +915,7 @@ namespace Data.Migrations
                     b.Navigation("PersonBusinessAreas");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.BusinessAreaType", b =>
+            modelBuilder.Entity("Domain.Entity.Core.BusinessAreaType", b =>
                 {
                     b.Navigation("BusinessAreas");
 
@@ -924,7 +924,7 @@ namespace Data.Migrations
                     b.Navigation("ParentRelationships");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.Customer", b =>
+            modelBuilder.Entity("Domain.Entity.Core.Customer", b =>
                 {
                     b.Navigation("BusinessAreas");
 
@@ -937,7 +937,7 @@ namespace Data.Migrations
                     b.Navigation("UserCustomers");
                 });
 
-            modelBuilder.Entity("Data.Entity.Core.Person", b =>
+            modelBuilder.Entity("Domain.Entity.Core.Person", b =>
                 {
                     b.Navigation("PersonBusinessAreas");
                 });

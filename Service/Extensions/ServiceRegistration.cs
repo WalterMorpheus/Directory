@@ -1,4 +1,5 @@
 ﻿using Data;
+using Domain.MappingProfiles;
 using Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,8 @@ namespace Service.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
+
+            services.AddAutoMapper(typeof(DomainProfile));
 
             return services;
         }

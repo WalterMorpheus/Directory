@@ -1,4 +1,4 @@
-﻿using Data.Entity.Auth;
+﻿using Domain.Entity.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,7 +49,7 @@ namespace Data.Seed
                 RoleId = adminRole.Id,
                 AlternateId = Guid.NewGuid(),
                 CreatedDate = DateTime.UtcNow,
-                CreatedBy = "migrations"
+                CreatedBy = "migration_seeding"
             });
         }
     }

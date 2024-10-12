@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Entity.Auth
+namespace Domain.Entity.Auth
 {
-    public class IdentityUserToken : IdentityUserToken<int>
+    public class UserClaim : IdentityUserClaim<int>
     {
         [Required]
         public Guid AlternateId { get; set; } = Guid.NewGuid();
