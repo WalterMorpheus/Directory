@@ -459,19 +459,19 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, new Guid("bfa940df-7971-4d5d-be98-22c443231ba8"), "8e6c5dc5-69a4-4201-88c8-86d2369e9669", "Admin", "ADMIN" },
-                    { 2, new Guid("b851eb58-6c07-467a-806e-5dd7315430f6"), "d13d14ac-83d4-4ab4-96b2-2cd1fa10bdaf", "User", "USER" }
+                    { 1, new Guid("15ac63da-22a0-4308-8aec-9accddf4a197"), "0555eceb-f6fc-434b-ad8d-dc4d3890d6a5", "Admin", "ADMIN" },
+                    { 2, new Guid("68c786b6-894a-4ce1-b786-a2d26f777538"), "b50635d9-968c-4617-ae39-c5f8ab800750", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "asp_net_users",
                 columns: new[] { "Id", "AccessFailedCount", "AlternateId", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, new Guid("245fc404-d82d-4de4-92e9-ae247420cc60"), "1768fc5a-d920-4281-9f0f-6594b61d0194", new DateTime(2024, 10, 12, 11, 49, 29, 244, DateTimeKind.Utc).AddTicks(5463), "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEBXJhOBu1Dk2uEJuYjJSXNdAoldtu8eiYbc1WIHTcySWn5wtGifDBBi7cyuPaqpHAw==", null, false, "", false, "admin" });
+                values: new object[] { 1, 0, new Guid("57f98a71-2aee-4499-8fe2-3667947eb3ee"), "62b83047-78dc-4aee-bf35-377dd217124b", new DateTime(2024, 10, 12, 12, 24, 36, 121, DateTimeKind.Utc).AddTicks(3485), "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEAmuBzd7s9J0GcYaDQcKeuLMn4UAHwFgwrP5V9PWQ0HeVDgTDX6twJnDU1AArodwMA==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "asp_net_user_roles",
                 columns: new[] { "RoleId", "UserId", "AlternateId", "CreatedBy", "CreatedDate", "UpdateBy", "UpdateDate" },
-                values: new object[] { 1, 1, new Guid("a5395a67-f1ea-4b24-93a1-0b17cca1e2cc"), "migration_seeding", new DateTime(2024, 10, 12, 11, 49, 29, 252, DateTimeKind.Utc).AddTicks(9698), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, 1, new Guid("db95d810-26dd-4065-8f68-d31a3cb8ba91"), "migration_seeding", new DateTime(2024, 10, 12, 12, 24, 36, 136, DateTimeKind.Utc).AddTicks(970), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_application_Name",
