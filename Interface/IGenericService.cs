@@ -2,10 +2,14 @@
 {
     public interface IGenericService<T, TKey> where T : class
     {
-        Task<T> GetByIdAsync(TKey id);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T> AddAsync(T entity);
-        Task UpdateAsync(T entity);
+        Task<TDto> AddAsync<TDto>(TDto dto);
+
+        Task<TDto> GetByIdAsync<TDto>(TKey id);
+
+        Task<IEnumerable<TDto>> GetAllAsync<TDto>();
+
+        Task<TDto> UpdateAsync<TDto>(TDto dto);
+
         Task DeleteAsync(TKey id);
     }
 }

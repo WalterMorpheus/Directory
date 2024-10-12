@@ -22,7 +22,6 @@ namespace ApiDirectory.Controllers
             _testService = testService;
 
         }
-
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {

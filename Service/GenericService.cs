@@ -1,44 +1,53 @@
-﻿using Interface;
+﻿using AutoMapper;
+using Interface;
 
 namespace Service
 {
     public class GenericService<T, TKey> : IGenericService<T, TKey> where T : class
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public GenericService(IUnitOfWork unitOfWork)
+        public GenericService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
-        public async Task<T> GetByIdAsync(TKey id)
+
+        public async Task<TDto> AddAsync<TDto>(TDto dto)
         {
             var repository = _unitOfWork.GetRepository<T, TKey>();
-            return await repository.GetByIdAsync(id);
+            var entity = _mapper.Map<T>(dto);
+            var addedEntityDto = await repository.AddAsync<TDto>(entity);
+            return addedEntityDto;
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+
+        public async Task<TDto> GetByIdAsync<TDto>(TKey id)
         {
             var repository = _unitOfWork.GetRepository<T, TKey>();
-            return await repository.GetAllAsync();
+            var entityDto = await repository.GetByIdAsync<TDto>(id);
+            return entityDto;
         }
-        public async Task<T> AddAsync(T entity)
+
+        public async Task<IEnumerable<TDto>> GetAllAsync<TDto>()
         {
             var repository = _unitOfWork.GetRepository<T, TKey>();
-            var addedEntity = await repository.AddAsync(entity);
-            await _unitOfWork.SaveChangesAsync();
-            return addedEntity;
+            var entityDtos = await repository.GetAllAsync<TDto>();
+            return entityDtos;
         }
-        public async Task UpdateAsync(T entity)
+
+        public async Task<TDto> UpdateAsync<TDto>(TDto dto)
         {
             var repository = _unitOfWork.GetRepository<T, TKey>();
-            await repository.UpdateAsync(entity);
-            await _unitOfWork.SaveChangesAsync();
+            var entity = _mapper.Map<T>(dto);
+            var updatedEntityDto = await repository.UpdateAsync<TDto>(entity);
+            return updatedEntityDto;
         }
+
         public async Task DeleteAsync(TKey id)
         {
             var repository = _unitOfWork.GetRepository<T, TKey>();
             await repository.DeleteAsync(id);
-            await _unitOfWork.SaveChangesAsync();
         }
     }
-
 }

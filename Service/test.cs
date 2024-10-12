@@ -1,28 +1,28 @@
 ﻿using Domain.Entity.Auth;
 using Interface;
+using Shared.DTOs;
 
 namespace Service
 {
     public class Test : ITest
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IGenericService<User, int> _userService;
 
-        public Test(IUnitOfWork unitOfWork, IGenericService<User, int> userService)
+        public Test(IGenericService<User, int> userService)
         {
-            _unitOfWork = unitOfWork;
             _userService = userService;
-
         }
-        public async Task<dynamic> ConnectionAsync()
-        {           
+
+        public async Task<UserDto> ConnectionAsync()
+        {
             try
             {
-                return await _userService.GetByIdAsync(1);
+                UserDto userDto = await _userService.GetByIdAsync<UserDto>(1);
+                return userDto ?? null;
             }
             catch (Exception)
             {
-                return new {};
+                return null;
             }
         }
     }

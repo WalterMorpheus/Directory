@@ -23,7 +23,9 @@ namespace Service.Extensions
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
 
-            services.AddAutoMapper(typeof(DomainProfile));
+            //services.AddAutoMapper(typeof(DomainProfile));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
             return services;
         }
