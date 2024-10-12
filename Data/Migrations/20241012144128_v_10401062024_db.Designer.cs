@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241012122436_v_10401062024_db")]
+    [Migration("20241012144128_v_10401062024_db")]
     partial class v_10401062024_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,16 +108,16 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("15ac63da-22a0-4308-8aec-9accddf4a197"),
-                            ConcurrencyStamp = "0555eceb-f6fc-434b-ad8d-dc4d3890d6a5",
+                            AlternateId = new Guid("9b70c1e2-99a3-4684-82b1-a87bb6ab0389"),
+                            ConcurrencyStamp = "8d905da0-bca7-4ea5-afe4-b059fe90f880",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("68c786b6-894a-4ce1-b786-a2d26f777538"),
-                            ConcurrencyStamp = "b50635d9-968c-4617-ae39-c5f8ab800750",
+                            AlternateId = new Guid("6e358abe-1f2f-4737-aea4-2ff8185e75b5"),
+                            ConcurrencyStamp = "4c556c38-fd8c-4af7-853a-7d54b933b485",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -200,15 +200,15 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            AlternateId = new Guid("57f98a71-2aee-4499-8fe2-3667947eb3ee"),
-                            ConcurrencyStamp = "62b83047-78dc-4aee-bf35-377dd217124b",
-                            CreatedDate = new DateTime(2024, 10, 12, 12, 24, 36, 121, DateTimeKind.Utc).AddTicks(3485),
+                            AlternateId = new Guid("45efff15-89b4-4320-a1e9-26b6896cb709"),
+                            ConcurrencyStamp = "86d51ebc-dbd1-440e-952c-14ba241e7dc8",
+                            CreatedDate = new DateTime(2024, 10, 12, 14, 41, 28, 284, DateTimeKind.Utc).AddTicks(7912),
                             Email = "admin@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAmuBzd7s9J0GcYaDQcKeuLMn4UAHwFgwrP5V9PWQ0HeVDgTDX6twJnDU1AArodwMA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGLEaPh7Nkzg/DDLv+wVauWzWoFZW6YmtAWE7uG9C7cVfdmkPx4GscLMr045AHqVeA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -302,9 +302,9 @@ namespace Data.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-                            AlternateId = new Guid("db95d810-26dd-4065-8f68-d31a3cb8ba91"),
+                            AlternateId = new Guid("43e72f7f-c80a-4330-8664-90d63d275e17"),
                             CreatedBy = "migration_seeding",
-                            CreatedDate = new DateTime(2024, 10, 12, 12, 24, 36, 136, DateTimeKind.Utc).AddTicks(970),
+                            CreatedDate = new DateTime(2024, 10, 12, 14, 41, 28, 293, DateTimeKind.Utc).AddTicks(6074),
                             UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -686,6 +686,37 @@ namespace Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("user_customer");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Miscellaneous.ExceptionLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("HResult")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Request")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StackTrace")
+                        .HasColumnType("text");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("exception_logs");
                 });
 
             modelBuilder.Entity("Domain.Entity.Auth.IdentityRoleClaim", b =>

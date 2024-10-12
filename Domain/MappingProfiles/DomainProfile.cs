@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entity.Auth;
+using Domain.Entity.Miscellaneous;
 using Shared.DTOs;
 
 namespace Domain.MappingProfiles
@@ -8,7 +9,8 @@ namespace Domain.MappingProfiles
     {
         public DomainProfile()
         {
-           CreateMap<User,UserDto>();
+           CreateMap<User,UserDto>().ReverseMap();
+           CreateMap<ExceptionLog, ExceptionLogDto>().ReverseMap();
         }
     }
 }

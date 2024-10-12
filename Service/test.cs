@@ -15,15 +15,8 @@ namespace Service
 
         public async Task<UserDto> ConnectionAsync()
         {
-            try
-            {
-                UserDto userDto = await _userService.GetByIdAsync<UserDto>(1);
-                return userDto ?? null;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            UserDto userDto = await _userService.GetByIdAsync<UserDto>(1);
+            return userDto ?? null;
         }
     }
 }
