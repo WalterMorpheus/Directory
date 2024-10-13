@@ -9,8 +9,8 @@ namespace Domain.MappingProfiles
     {
         public DomainProfile()
         {
-           CreateMap<User,UserDto>().ReverseMap();
-           CreateMap<ExceptionLog, ExceptionLogDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<ExceptionLog, ExceptionLogDto>().ReverseMap();
         }
     }
 }

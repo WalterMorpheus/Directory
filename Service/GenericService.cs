@@ -1,52 +1,58 @@
-﻿using AutoMapper;
-using Interface;
+﻿using Interface;
+using System.Linq.Expressions;
 
 namespace Service
 {
-    public class GenericService<T, TKey> : IGenericService<T, TKey> where T : class
+    public class GenericService<TDto, TEntity, TKey> : IGenericService<TDto, TEntity, TKey>
+        where TDto : class
+        where TEntity : class
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public GenericService(IUnitOfWork unitOfWork, IMapper mapper)
+        public GenericService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
-        public async Task<TDto> AddAsync<TDto>(TDto dto)
+        public async Task<IEnumerable<TDto>> GetAllAsync()
         {
-            var repository = _unitOfWork.GetRepository<T, TKey>();
-            var entity = _mapper.Map<T>(dto);
-            var addedEntityDto = await repository.AddAsync<TDto>(entity);
-            return addedEntityDto;
+            var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
+            return await repository.GetAllAsync();
         }
 
-        public async Task<TDto> GetByIdAsync<TDto>(TKey id)
+        public async Task<TDto> GetByIdAsync(TKey id)
         {
-            var repository = _unitOfWork.GetRepository<T, TKey>();
-            var entityDto = await repository.GetByIdAsync<TDto>(id);
-            return entityDto;
+            var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
+            return await repository.GetByIdAsync(id);
         }
 
-        public async Task<IEnumerable<TDto>> GetAllAsync<TDto>()
+        public async Task<TDto> GetByReferenceAsync(Expression<Func<TDto, bool>> predicate)
         {
-            var repository = _unitOfWork.GetRepository<T, TKey>();
-            var entityDtos = await repository.GetAllAsync<TDto>();
-            return entityDtos;
+            var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
+            return await repository.GetByReferenceAsync(predicate);
         }
 
-        public async Task<TDto> UpdateAsync<TDto>(TDto dto)
+        public async Task<IEnumerable<TDto>> GetListByParametersAsync(Expression<Func<TDto, bool>> predicate)
         {
-            var repository = _unitOfWork.GetRepository<T, TKey>();
-            var entity = _mapper.Map<T>(dto);
-            var updatedEntityDto = await repository.UpdateAsync<TDto>(entity);
-            return updatedEntityDto;
+            var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
+            return await repository.GetListByParametersAsync(predicate);
+        }
+
+        public async Task<TDto> AddAsync(TDto dto)
+        {
+            var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
+            return await repository.AddAsync(dto);
+        }
+
+        public async Task<TDto> UpdateAsync(TDto dto)
+        {
+            var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
+            return await repository.UpdateAsync(dto);
         }
 
         public async Task DeleteAsync(TKey id)
         {
-            var repository = _unitOfWork.GetRepository<T, TKey>();
+            var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
             await repository.DeleteAsync(id);
         }
     }

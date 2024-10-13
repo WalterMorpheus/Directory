@@ -18,9 +18,12 @@ namespace Service.Helper
             _serviceProvider = serviceProvider;
         }
 
-        public IRepository<T, TKey> GetRepository<T, TKey>() where T : class
+        public IRepository<TDto, TEntity, TKey> GetRepository<TDto, TEntity, TKey>()
+            where TDto : class
+            where TEntity : class
         {
-            return ActivatorUtilities.CreateInstance<Repository<T, TKey>>(_serviceProvider, _context, _mapper);
+            return ActivatorUtilities.CreateInstance<Repository<TDto, TEntity, TKey>>(
+                _serviceProvider, _context, _mapper);
         }
 
         public async Task<int> SaveChangesAsync()

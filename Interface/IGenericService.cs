@@ -1,15 +1,15 @@
-﻿namespace Interface
+﻿using System.Linq.Expressions;
+
+namespace Interface
 {
-    public interface IGenericService<T, TKey> where T : class
+    public interface IGenericService<TDto, TEntity, TKey>
     {
-        Task<TDto> AddAsync<TDto>(TDto dto);
-
-        Task<TDto> GetByIdAsync<TDto>(TKey id);
-
-        Task<IEnumerable<TDto>> GetAllAsync<TDto>();
-
-        Task<TDto> UpdateAsync<TDto>(TDto dto);
-
+        Task<IEnumerable<TDto>> GetAllAsync();
+        Task<TDto> GetByIdAsync(TKey id);
+        Task<TDto> GetByReferenceAsync(Expression<Func<TDto, bool>> predicate);
+        Task<IEnumerable<TDto>> GetListByParametersAsync(Expression<Func<TDto, bool>> predicate);
+        Task<TDto> AddAsync(TDto dto);
+        Task<TDto> UpdateAsync(TDto dto);
         Task DeleteAsync(TKey id);
     }
 }

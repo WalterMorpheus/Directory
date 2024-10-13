@@ -7,14 +7,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.33" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.33" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.33">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.33.0" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.29" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.33.0" />
 	</ItemGroup>
 
 	<!-- Referencing Service Layer to use business logic -->

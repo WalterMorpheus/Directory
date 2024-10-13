@@ -7,9 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.33" />
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.33.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.33.0" />
 	</ItemGroup>
 
 	<!-- Project References -->
@@ -18,5 +21,8 @@
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 		<ProjectReference Include="..\Interface\Interface.csproj" />
 		<ProjectReference Include="..\Shared\Shared.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Services\Core\" />
 	</ItemGroup>
 </Project>

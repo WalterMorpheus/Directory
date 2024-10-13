@@ -1,10 +1,12 @@
-﻿using Data;
+﻿using AutoMapper.Extensions.ExpressionMapping;
+using Data;
 using Domain.MappingProfiles;
 using Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Helper;
+using Service.Services.Auth;
 
 namespace Service.Extensions
 {
@@ -17,13 +19,14 @@ namespace Service.Extensions
                 opt.UseNpgsql(config.GetConnectionString("Connection"),
                     npgsqlOptions => npgsqlOptions.MigrationsAssembly("Data"));
             }, ServiceLifetime.Scoped);
-
+       
             services.AddScoped<ITest, Test>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IException, ExceptionService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
-            services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
+            services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
+            services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(DomainProfile));     
 
             return services;
         }

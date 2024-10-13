@@ -15,11 +15,10 @@ namespace Service.Extensions
                 try
                 {
                     var context = services.GetRequiredService<DataContext>();
-                    context.Database.Migrate();  // Apply migrations
+                    context.Database.Migrate();
                 }
                 catch (Exception ex)
                 {
-                    // Log the error or handle it as needed
                     Console.WriteLine($"An error occurred while migrating the database: {ex.Message}");
                 }
             }

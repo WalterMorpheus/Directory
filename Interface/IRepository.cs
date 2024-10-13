@@ -1,15 +1,20 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Interface
 {
-    public interface IRepository<T, TKey> where T : class
+    public interface IRepository<TDto, TEntity, TKey>
+        where TDto : class
+        where TEntity : class
     {
-        Task<TDto> AddAsync<TDto>(T entity);
-        Task<TDto> GetByIdAsync<TDto>(TKey id);
-        Task<TDto> GetByReferenceAsync<TDto>(Expression<Func<T, bool>> predicate);
-        Task<IEnumerable<TDto>> GetAllAsync<TDto>();
-        Task<IEnumerable<TDto>> GetListByParametersAsync<TDto>(Expression<Func<T, bool>> predicate);
-        Task<TDto> UpdateAsync<TDto>(T entity);
+        Task<TDto> AddAsync(TDto dto);
+        Task<TDto> GetByIdAsync(TKey id);
+        Task<IEnumerable<TDto>> GetAllAsync();
+        Task<TDto> GetByReferenceAsync(Expression<Func<TDto, bool>> predicate);
+        Task<IEnumerable<TDto>> GetListByParametersAsync(Expression<Func<TDto, bool>> predicate);
+        Task<TDto> UpdateAsync(TDto dto);
         Task DeleteAsync(TKey id);
     }
 }
