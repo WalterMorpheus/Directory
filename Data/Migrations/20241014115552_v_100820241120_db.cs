@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Migrations
 {
-    public partial class v_10401062024_db : Migration
+    public partial class v_100820241120_db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -477,19 +477,19 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, new Guid("9b70c1e2-99a3-4684-82b1-a87bb6ab0389"), "8d905da0-bca7-4ea5-afe4-b059fe90f880", "Admin", "ADMIN" },
-                    { 2, new Guid("6e358abe-1f2f-4737-aea4-2ff8185e75b5"), "4c556c38-fd8c-4af7-853a-7d54b933b485", "User", "USER" }
+                    { 1, new Guid("77367e50-ac53-47b2-bbb9-520b068baafa"), "a9f9261f-d72b-4251-8792-81f3b6890bf4", "Admin", "ADMIN" },
+                    { 2, new Guid("49a85e25-3101-46ac-9209-a9d621dc73c7"), "090c8245-6aea-4869-99db-baffee19f91c", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "asp_net_users",
                 columns: new[] { "Id", "AccessFailedCount", "AlternateId", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, new Guid("45efff15-89b4-4320-a1e9-26b6896cb709"), "86d51ebc-dbd1-440e-952c-14ba241e7dc8", new DateTime(2024, 10, 12, 14, 41, 28, 284, DateTimeKind.Utc).AddTicks(7912), "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEGLEaPh7Nkzg/DDLv+wVauWzWoFZW6YmtAWE7uG9C7cVfdmkPx4GscLMr045AHqVeA==", null, false, "", false, "admin" });
+                values: new object[] { 1, 0, new Guid("048ce386-bf49-4a42-b872-77102def82b8"), "609b8fa2-af04-42e1-8880-cee82c585ff8", new DateTime(2024, 10, 14, 11, 55, 51, 850, DateTimeKind.Utc).AddTicks(9530), "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEJm/UjPJr7IZJxvp2AEhFecZu8qXiBdYNVxSRVcOROM4quNeuvdTgqRkOgPvEGU7OQ==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "asp_net_user_roles",
                 columns: new[] { "RoleId", "UserId", "AlternateId", "CreatedBy", "CreatedDate", "UpdateBy", "UpdateDate" },
-                values: new object[] { 1, 1, new Guid("43e72f7f-c80a-4330-8664-90d63d275e17"), "migration_seeding", new DateTime(2024, 10, 12, 14, 41, 28, 293, DateTimeKind.Utc).AddTicks(6074), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, 1, new Guid("45d8225e-f8dd-460b-a525-fe6d74b11246"), "migration_seeding", new DateTime(2024, 10, 14, 11, 55, 51, 855, DateTimeKind.Utc).AddTicks(2982), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_application_Name",

@@ -45,7 +45,7 @@ namespace ApiDirectory.Middleware
             {
                 _logger.LogError(ex, ex.Message);
                 context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
                 using (var scope = _scopeFactory.CreateScope())
                 {

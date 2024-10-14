@@ -12,7 +12,7 @@ namespace Domain.Entity.Auth
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = "api";
         public DateTime UpdateDate { get; set; }
         public string UpdateBy { get; set; }
     }

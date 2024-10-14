@@ -8,17 +8,25 @@ namespace Service.Services.Auth
     {
         private readonly IGenericService<UserDto,User, int> _userService;
         private readonly ITokenService _tokenService;
-        public UserService(IGenericService<UserDto,User, int> userService, ITokenService tokenService)
+        private readonly IAuthenticationService _authenticationService;
+        public UserService(IGenericService<UserDto,User, int> userService, ITokenService tokenService, IAuthenticationService authenticationService)
         {
             _userService = userService;
-            _tokenService = tokenService;   
+            _tokenService = tokenService;
+            _authenticationService = authenticationService;
         }
-        public async Task<string> login(UserDto userDto)
+        public async Task<string> login(UserDto dto)
         {
-            var user = await _userService.GetByReferenceAsync(u => u.UserName == userDto.UserName);
-            if (user == null) return string.Empty;
-
-            return await _tokenService.CreateToken(user);
+            return await _tokenService.CreateToken(dto);
+        }
+        public async Task<string> Register(UserDto dto)
+        {
+            if ( await _userService.GetByReferenceAsync(u => u.UserName == dto.UserName) != null)
+            {
+                throw new InvalidOperationException("A user with the same credentials already exists");
+            }
+            await _authenticationService.AddAsync(dto);
+            return await _tokenService.CreateToken(dto);
         }
     }
 }

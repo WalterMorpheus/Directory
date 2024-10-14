@@ -23,9 +23,13 @@ namespace Service.Helper
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             _userManager = userManager;
         }
-        public async Task<string> CreateToken(UserDto userDto)
+        public async Task<string> CreateToken(UserDto dto)
         {
-            var user = _context.Users.FirstOrDefault(x=>x.UserName == userDto.UserName);
+            var user = _context.Users.FirstOrDefault(x=>x.UserName == dto.UserName);
+            if (!await _userManager.CheckPasswordAsync(user, dto.Password))
+            {
+                throw new InvalidOperationException("username or password is incorrect");
+            }
 
             var claims = new List<Claim>
             {
