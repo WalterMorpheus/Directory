@@ -1,9 +1,9 @@
-﻿using Domain.Entity.Auth;
+﻿using Shared.DTOs;
 
 namespace Interface
 {
     public interface ITokenService
     {
-        Task<string> CreateToken(User user);
+        Task<string> CreateToken(UserDto userDto);
     }
 }

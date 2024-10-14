@@ -26,6 +26,7 @@ namespace Service.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
             services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
+            services.AddScoped<ITokenService, TokenService>();
             services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(DomainProfile));     
 
             return services;
