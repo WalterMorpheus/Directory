@@ -7,12 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Services\Core\**" />
-	  <EmbeddedResource Remove="Services\Core\**" />
-	  <None Remove="Services\Core\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.35" />
 		<PackageReference Include="AutoMapper" Version="13.0.1" />

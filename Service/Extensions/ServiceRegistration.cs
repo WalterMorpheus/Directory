@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Helper;
 using Service.Services.Auth;
+using Service.Services.Core;
 
 namespace Service.Extensions
 {
@@ -21,6 +22,7 @@ namespace Service.Extensions
             }, ServiceLifetime.Scoped);
        
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IException, ExceptionService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
