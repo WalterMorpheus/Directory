@@ -20,5 +20,13 @@ namespace Service.Services.Core
         {
             return await _applicationService.GetByIdAsync(id);
         }
+        public async Task<IEnumerable<ApplicationDto>> list()
+        {
+            return await _applicationService.GetAllAsync();
+        }
+        public async Task<bool> Update(ApplicationDto dto)
+        {
+            return await _applicationService.UpdateAsync(dto) != null;
+        }
     }
 }

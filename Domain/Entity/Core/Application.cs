@@ -15,7 +15,7 @@ namespace Domain.Entity.Core
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = "api";
         public DateTime UpdateDate { get; set; }
         public string UpdateBy { get; set; }
         public bool IsDeleted { get; set; }

@@ -1,20 +1,36 @@
-﻿using Interface;
+﻿using ApiDirectory.Controllers;
+using Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
 
-namespace ApiDirectory.Controllers
+[Authorize]
+public class ApplicationController : BaseApiController, IEndpointService<ApplicationDto>
 {
-    public class ApplicationController : BaseApiController, IEndpointService<ApplicationDto>
+    private readonly IApplicationService _applicationServiceService;
+
+    public ApplicationController(IApplicationService applicationServiceService)
     {
-        [HttpGet("add")]
-        public Task<ActionResult<bool>> AddAsync(ApplicationDto dto)
-        {
-            throw new NotImplementedException();
-        }
-        [HttpGet("get")]
-        public Task<ActionResult<ApplicationDto>> GetAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        _applicationServiceService = applicationServiceService;
+    }
+    [HttpPut("add")]
+    public async Task<ActionResult<bool>> AddAsync(ApplicationDto dto)
+    {
+        return await _applicationServiceService.Add(dto);
+    }
+    [HttpGet("list")]
+    public async Task<ActionResult<IEnumerable<ApplicationDto>>> listAsync()
+    {
+        return new ActionResult<IEnumerable<ApplicationDto>>(await _applicationServiceService.list());
+    }
+    [HttpGet("get")]
+    public async Task<ActionResult<ApplicationDto>> GetAsync(int id)
+    {
+        return await _applicationServiceService.Get(id);
+    }
+    [HttpGet("update")]
+    public async Task<ActionResult<bool>> UpdateAsync(ApplicationDto dto)
+    {
+        return await _applicationServiceService.Update(dto);
     }
 }
