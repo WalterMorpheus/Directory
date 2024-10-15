@@ -8,7 +8,7 @@ namespace Data.Seed
     {
         public static void Seed(ModelBuilder builder)
         {
-            var adminRole = new Role
+            Role adminRole = new Role
             {
                 Id = 1,
                 Name = "Admin",
@@ -16,16 +16,16 @@ namespace Data.Seed
                 AlternateId = Guid.NewGuid()
             };
 
-            var userRole = new Role
+            Role userRole = new Role
             {
                 Id = 2,
                 Name = "User",
                 NormalizedName = "USER",
                 AlternateId = Guid.NewGuid()
             };
-            var hasher = new PasswordHasher<User>();
+            PasswordHasher<User> hasher = new PasswordHasher<User>();
 
-            var adminUser = new User
+            User adminUser = new User
             {
                 Id = 1,
                 UserName = "admin",

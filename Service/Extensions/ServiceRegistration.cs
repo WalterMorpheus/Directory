@@ -20,7 +20,7 @@ namespace Service.Extensions
                 opt.UseNpgsql(config.GetConnectionString("Connection"),
                     npgsqlOptions => npgsqlOptions.MigrationsAssembly("Data"));
             }, ServiceLifetime.Scoped);
-       
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IException, ExceptionService>();
@@ -29,6 +29,8 @@ namespace Service.Extensions
             services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IException, ExceptionService>();
+
             services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(DomainProfile));     
 
             return services;

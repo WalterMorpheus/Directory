@@ -24,15 +24,17 @@ namespace ApiDirectory.Middleware
         private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly IHostEnvironment _env;
         private readonly IServiceScopeFactory _scopeFactory;
-
+        private readonly IException exHandler;
 
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger,
-            IHostEnvironment env, IServiceScopeFactory scopeFactory)
+            IHostEnvironment env, IServiceScopeFactory scopeFactory,
+            IException exHandler)
         {
             _env = env;
             _logger = logger;
             _next = next;
             _scopeFactory = scopeFactory;
+            this.exHandler = exHandler;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -47,27 +49,22 @@ namespace ApiDirectory.Middleware
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-                using (var scope = _scopeFactory.CreateScope())
+                await exHandler.ExceptionLogAsync(new ExceptionLogDto
                 {
-                    var exceptionService = scope.ServiceProvider.GetRequiredService<IException>();
+                    StatusCode = context.Response.StatusCode,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Date = DateTime.UtcNow,
+                    Request = $"{context.Request.Method}; {context.Request.Scheme}://{context.Request.Host}{context.Request.Path}",
+                    HResult = ex.HResult
+                });
 
-                    await exceptionService.ExceptionLogAsync(new ExceptionLogDto
-                    {
-                        StatusCode = context.Response.StatusCode,
-                        Message = ex.Message,
-                        StackTrace = ex.StackTrace,
-                        Date = DateTime.UtcNow,
-                        Request = $"{context.Request.Method}; {context.Request.Scheme}://{context.Request.Host}{context.Request.Path}",
-                        HResult = ex.HResult
-                    });
-                }
-
-                var response = _env.IsDevelopment()
+                ApiException response = _env.IsDevelopment()
                     ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
                     : new ApiException(context.Response.StatusCode, ex.Message, "Internal Server Error");
 
-                var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                var json = JsonSerializer.Serialize(response, options);
+                JsonSerializerOptions options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+                string json = JsonSerializer.Serialize(response, options);
 
                 await context.Response.WriteAsync(json);
             }

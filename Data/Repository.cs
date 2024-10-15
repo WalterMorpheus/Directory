@@ -22,20 +22,20 @@ namespace Data
         }
         public async Task<TDto> AddAsync(TDto dto)
         {
-            var entity = _mapper.Map<TEntity>(dto);
+            TEntity entity = _mapper.Map<TEntity>(dto);
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
             return _mapper.Map<TDto>(entity);
         }
         public async Task<TDto> GetByIdAsync(TKey id)
         {
-            var entity = await _dbSet.FindAsync(id);
+            TEntity entity = await _dbSet.FindAsync(id);
             if (entity == null) return null;
             return _mapper.Map<TDto>(entity);
         }
         public async Task<IEnumerable<TDto>> GetAllAsync()
         {
-            var entities = await _dbSet.ToListAsync();
+            IEnumerable<TEntity> entities = await _dbSet.ToListAsync();
             return _mapper.Map<IEnumerable<TDto>>(entities);
         }
         public async Task<TDto> GetByReferenceAsync(Expression<Func<TDto, bool>> predicate)
@@ -53,14 +53,14 @@ namespace Data
         }
         public async Task<TDto> UpdateAsync(TDto dto)
         {
-            var entity = _mapper.Map<TEntity>(dto);
+            TEntity entity = _mapper.Map<TEntity>(dto);
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
             return _mapper.Map<TDto>(entity);
         }
         public async Task DeleteAsync(TKey id)
         {
-            var entity = await _dbSet.FindAsync(id);
+            TEntity entity = await _dbSet.FindAsync(id);
             if (entity != null)
             {
                 _dbSet.Remove(entity);
