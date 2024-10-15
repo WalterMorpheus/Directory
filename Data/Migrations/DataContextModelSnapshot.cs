@@ -106,16 +106,16 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("279130ad-2f0d-4c43-ae88-cbc4ecdf45af"),
-                            ConcurrencyStamp = "97df803a-3edd-4806-bc91-794738f3cbbe",
+                            AlternateId = new Guid("c07f4dbe-fe7f-49d6-abd0-6a52d3380555"),
+                            ConcurrencyStamp = "57ebda6b-1583-475f-ad00-d745ffdf6418",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("ad148c4a-aad6-455a-b889-94a997e49c00"),
-                            ConcurrencyStamp = "56b2e50f-1c55-468a-860a-abbb8af36786",
+                            AlternateId = new Guid("1b75132a-7ac8-4249-a1e8-701ea14e7f19"),
+                            ConcurrencyStamp = "a47bd495-4e44-42bc-a673-d717ee6bce3d",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -198,15 +198,15 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            AlternateId = new Guid("fecda26f-33b4-4d1a-a2a0-a89861945a5a"),
-                            ConcurrencyStamp = "41f883fe-57d9-474d-af2a-53b1cd01ed6d",
-                            CreatedDate = new DateTime(2024, 10, 14, 17, 52, 50, 191, DateTimeKind.Utc).AddTicks(8720),
+                            AlternateId = new Guid("74e78d3b-7183-4377-b67b-c2f74d5aaeee"),
+                            ConcurrencyStamp = "4b34936c-27ef-4685-b9e6-130125fd256b",
+                            CreatedDate = new DateTime(2024, 10, 15, 6, 16, 54, 282, DateTimeKind.Utc).AddTicks(3066),
                             Email = "admin@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBK6fZ7odYB+FREUzDInqnL21kiSGf/segv1Rk6Q7QB0nZVHE7OQHdVQLWLgqV2gwQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBqcgfx3cwYyaFgUZkyEIAGZE728LsYMKg8zLicbg8QqidKlIST1K7s8cYEnQWQj/w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -300,9 +300,9 @@ namespace Data.Migrations
                         {
                             UserId = 1,
                             RoleId = 1,
-                            AlternateId = new Guid("9d457ff2-5994-4937-9bda-3ebb4ec7bfc8"),
+                            AlternateId = new Guid("75437cb1-a124-4229-bcf1-3fcd26070a17"),
                             CreatedBy = "migration_seeding",
-                            CreatedDate = new DateTime(2024, 10, 14, 17, 52, 50, 200, DateTimeKind.Utc).AddTicks(3253),
+                            CreatedDate = new DateTime(2024, 10, 15, 6, 16, 54, 285, DateTimeKind.Utc).AddTicks(8705),
                             UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });

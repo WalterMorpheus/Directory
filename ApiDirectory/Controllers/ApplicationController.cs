@@ -23,12 +23,12 @@ public class ApplicationController : BaseApiController, IEndpointService<Applica
     {
         return new ActionResult<IEnumerable<ApplicationDto>>(await _applicationServiceService.list());
     }
-    [HttpGet("get")]
+    [HttpGet("get/{id}")]
     public async Task<ActionResult<ApplicationDto>> GetAsync(int id)
     {
         return await _applicationServiceService.Get(id);
     }
-    [HttpGet("update")]
+    [HttpPost("update")]
     public async Task<ActionResult<bool>> UpdateAsync(ApplicationDto dto)
     {
         return await _applicationServiceService.Update(dto);

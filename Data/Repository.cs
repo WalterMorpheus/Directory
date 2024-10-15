@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +20,6 @@ namespace Data
             _dbSet = _context.Set<TEntity>();
             _mapper = mapper;
         }
-
         public async Task<TDto> AddAsync(TDto dto)
         {
             var entity = _mapper.Map<TEntity>(dto);
@@ -31,14 +27,12 @@ namespace Data
             await _context.SaveChangesAsync();
             return _mapper.Map<TDto>(entity);
         }
-
         public async Task<TDto> GetByIdAsync(TKey id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity == null) return null;
             return _mapper.Map<TDto>(entity);
         }
-
         public async Task<IEnumerable<TDto>> GetAllAsync()
         {
             var entities = await _dbSet.ToListAsync();
@@ -57,7 +51,6 @@ namespace Data
             var entities = await _dbSet.Where(entityPredicate).ToListAsync();
             return _mapper.Map<IEnumerable<TDto>>(entities);
         }
-
         public async Task<TDto> UpdateAsync(TDto dto)
         {
             var entity = _mapper.Map<TEntity>(dto);
@@ -65,7 +58,6 @@ namespace Data
             await _context.SaveChangesAsync();
             return _mapper.Map<TDto>(entity);
         }
-
         public async Task DeleteAsync(TKey id)
         {
             var entity = await _dbSet.FindAsync(id);
