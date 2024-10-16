@@ -21,7 +21,7 @@ app.UseCors(x => x
 .AllowAnyHeader()
 .AllowAnyMethod()
 .AllowCredentials()
-.WithOrigins("https://localhost:7214"));
+.WithOrigins("http://localhost:4200","https://localhost:4200"));
 
 app.MigrateDatabase();
 

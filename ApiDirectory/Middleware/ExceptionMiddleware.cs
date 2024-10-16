@@ -26,20 +26,26 @@ namespace ApiDirectory.Middleware
             {
                 errorMessage = exc.Message;
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                _logger.LogError(exc, $"Error {errorReference}: " + exc.Message);
+                _logger.LogError(exc, $"Error {errorReference}: {exc.Message}");
+
+                if (context.Response.HasStarted) return;
+                
+                context.Response.ContentType = "application/json";
+                string result = JsonSerializer.Serialize(new { reference = errorReference, error = errorMessage });
+                await context.Response.WriteAsync(result);
             }
             catch (Exception ex)
             {
                 errorMessage = "An error occurred. Please try again.";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                _logger.LogError(ex, $"Error {errorReference}: " + ex.Message);
-            }
-            finally 
-            {
+                _logger.LogError(ex, $"Error {errorReference}: {ex.Message}");
+
+                if (context.Response.HasStarted) return;
+                
                 context.Response.ContentType = "application/json";
                 string result = JsonSerializer.Serialize(new { reference = errorReference, error = errorMessage });
                 await context.Response.WriteAsync(result);
-            }          
+            }
         }
     }
 }
