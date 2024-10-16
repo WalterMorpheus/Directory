@@ -13,7 +13,7 @@ public class ApplicationController : BaseApiController, IEndpointService<Applica
     {
         _applicationServiceService = applicationServiceService;
     }
-    [HttpPut("add")]
+    [HttpPost("add")]
     public async Task<ActionResult<bool>> AddAsync(ApplicationDto dto)
     {
         return await _applicationServiceService.Add(dto);
