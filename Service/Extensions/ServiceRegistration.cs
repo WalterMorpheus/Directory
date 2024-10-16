@@ -21,16 +21,18 @@ namespace Service.Extensions
                     npgsqlOptions => npgsqlOptions.MigrationsAssembly("Data"));
             }, ServiceLifetime.Scoped);
 
+            /* Custom Logic And Database*/
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IApplicationService, ApplicationService>();
-            services.AddScoped<IException, ExceptionService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
             services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
+
+            /*Microsoft Authentication*/
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IException, ExceptionService>();
 
+            /*3rd part*/
             services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(DomainProfile));     
 
             return services;

@@ -115,24 +115,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "exception_logs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StatusCode = table.Column<int>(type: "integer", nullable: false),
-                    Message = table.Column<string>(type: "text", nullable: true),
-                    StackTrace = table.Column<string>(type: "text", nullable: true),
-                    HResult = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Request = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_exception_logs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "asp_net_role_claims",
                 columns: table => new
                 {
@@ -477,19 +459,19 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, new Guid("c07f4dbe-fe7f-49d6-abd0-6a52d3380555"), "57ebda6b-1583-475f-ad00-d745ffdf6418", "Admin", "ADMIN" },
-                    { 2, new Guid("1b75132a-7ac8-4249-a1e8-701ea14e7f19"), "a47bd495-4e44-42bc-a673-d717ee6bce3d", "User", "USER" }
+                    { 1, new Guid("d38ff165-5658-4ff2-96e6-95eb05e7e2e3"), "e01bef90-e410-4d5f-a6a2-e325461b3ddb", "Admin", "ADMIN" },
+                    { 2, new Guid("6da3651f-77b3-4f2a-afed-3ee15d366d08"), "760623ce-04c3-40af-b80a-d397055d4568", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "asp_net_users",
                 columns: new[] { "Id", "AccessFailedCount", "AlternateId", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, new Guid("74e78d3b-7183-4377-b67b-c2f74d5aaeee"), "4b34936c-27ef-4685-b9e6-130125fd256b", new DateTime(2024, 10, 15, 6, 16, 54, 282, DateTimeKind.Utc).AddTicks(3066), "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEBqcgfx3cwYyaFgUZkyEIAGZE728LsYMKg8zLicbg8QqidKlIST1K7s8cYEnQWQj/w==", null, false, "", false, "admin" });
+                values: new object[] { 1, 0, new Guid("7b4b3eae-5b9d-48ee-a638-87b8bab02346"), "a0379737-da89-40dc-9721-7addf564a6fb", new DateTime(2024, 10, 16, 6, 52, 47, 649, DateTimeKind.Utc).AddTicks(9404), "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEIvCUYAew13zKb1O8DH9EP2Uv7uc8uer1M848S1Eo+ROUECKzp0RlJEz1SJrFZ+Bng==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "asp_net_user_roles",
                 columns: new[] { "RoleId", "UserId", "AlternateId", "CreatedBy", "CreatedDate", "UpdateBy", "UpdateDate" },
-                values: new object[] { 1, 1, new Guid("75437cb1-a124-4229-bcf1-3fcd26070a17"), "migration_seeding", new DateTime(2024, 10, 15, 6, 16, 54, 285, DateTimeKind.Utc).AddTicks(8705), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, 1, new Guid("2a34b161-3725-4159-9c3e-03834e5e5311"), "migration_seeding", new DateTime(2024, 10, 16, 6, 52, 47, 654, DateTimeKind.Utc).AddTicks(6467), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_application_Name",
@@ -625,9 +607,6 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "customer_business_area");
-
-            migrationBuilder.DropTable(
-                name: "exception_logs");
 
             migrationBuilder.DropTable(
                 name: "person_business_area");

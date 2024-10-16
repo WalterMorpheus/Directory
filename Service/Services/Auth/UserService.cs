@@ -22,9 +22,8 @@ namespace Service.Services.Auth
         public async Task<string> Register(UserDto dto)
         {
             if ( await _userService.GetByReferenceAsync(u => u.UserName == dto.UserName) != null)
-            {
                 throw new InvalidOperationException("A user with the same credentials already exists");
-            }
+
             await _authenticationService.AddAsync(dto);
             return await _tokenService.CreateToken(dto);
         }
