@@ -11,12 +11,12 @@ namespace ApiDirectory.Controllers
         {
             _userService = userService;
         }
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<ActionResult<object>> LoginAsync(UserDto dto) 
         {
             return new { token = await _userService.login(dto) }; 
         }
-        [HttpPut("register")]
+        [HttpPost("register")]
         public async Task<ActionResult<object>> RegisterAsync(UserDto dto)
         {
             return new { token = await _userService.Register(dto) };

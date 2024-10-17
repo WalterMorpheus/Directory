@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
+import { User } from './models/user';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +10,20 @@ import { Component, inject, OnInit } from '@angular/core';
 })
 export class AppComponent  implements OnInit{
   http = inject(HttpClient);
-  title = 'ui_directory';
+  title = 'Directory';
   applications: any;
 
+  constructor(private userService: UserService) {}
+
   ngOnInit(): void {
-    this.http.get('https://localhost:7214/api/application/list').subscribe({
-      next: response => this.applications = response,
-      error: error => console.log(error),
-      complete() {}     
-    });
+    this.setCurrentUser();
+  }
+
+  setCurrentUser()
+  {
+    const userString = localStorage.getItem('user');
+    if(!userString) return;
+    const user: User = JSON.parse(userString);
+    this.userService.setCurrentUser(user);
   }
 }
