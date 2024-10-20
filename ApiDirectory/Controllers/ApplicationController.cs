@@ -1,36 +1,48 @@
-﻿using ApiDirectory.Controllers;
+﻿
+
 using Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
 
-[Authorize]
-public class ApplicationController : BaseApiController, IEndpointService<ApplicationDto>
+namespace ApiDirectory.Controllers
 {
-    private readonly IApplicationService _applicationServiceService;
+    [Authorize]
+    public class ApplicationController : BaseApiController
+    {
+        private readonly IEndpointService<ApplicationDto> _endpointService;
+        public ApplicationController(IEndpointService<ApplicationDto> endpointService)
+        {
+            _endpointService = endpointService;
+        }
 
-    public ApplicationController(IApplicationService applicationServiceService)
-    {
-        _applicationServiceService = applicationServiceService;
-    }
-    [HttpPost("add")]
-    public async Task<ActionResult<bool>> AddAsync(ApplicationDto dto)
-    {
-        return await _applicationServiceService.Add(dto);
-    }
-    [HttpGet("list")]
-    public async Task<ActionResult<IEnumerable<ApplicationDto>>> listAsync()
-    {
-        return new ActionResult<IEnumerable<ApplicationDto>>(await _applicationServiceService.list());
-    }
-    [HttpGet("get/{id}")]
-    public async Task<ActionResult<ApplicationDto>> GetAsync(int id)
-    {
-        return await _applicationServiceService.Get(id);
-    }
-    [HttpPost("update")]
-    public async Task<ActionResult<bool>> UpdateAsync(ApplicationDto dto)
-    {
-        return await _applicationServiceService.Update(dto);
+        [HttpPost("add")]
+        public async Task<IActionResult> Add(ApplicationDto dto)
+        {
+            var result = await _endpointService.AddAsync(dto);
+            return result.Result;
+        }
+        [HttpGet("get{id}")]
+        public async Task<IActionResult> GetByAlternateId(Guid id)
+        {
+            var result = await _endpointService.GetByAlternateID(id);
+            return result;
+        }
+        [HttpGet("list")]
+        public async Task<IActionResult> List()
+        {
+            var result = await _endpointService.listAsync();
+            return result.Result;
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(ApplicationDto dto)
+        {
+            var result = await _endpointService.UpdateAsync(dto);
+            return result.Result;
+        }
     }
 }
+
+
+
