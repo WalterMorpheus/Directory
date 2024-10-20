@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Domain.Entity.Auth;
-using Domain.Entity.Core;
-using Shared.DTOs;
+using Data.Entity.Auth;
+using Data.Entity.Core;
+using Domain.DTOs;
 
 namespace Domain.MappingProfiles
 {

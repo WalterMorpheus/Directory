@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Domain.Entity.Auth;
+using Data.Entity.Auth;
+using Domain.DTOs;
 using Interface;
 using Microsoft.AspNetCore.Identity;
-using Shared.DTOs;
 
 namespace Service.Helper
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService <TDto> : IAuthenticationService <UserDto>
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;

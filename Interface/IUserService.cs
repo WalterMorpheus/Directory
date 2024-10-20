@@ -1,11 +1,9 @@
-﻿using Shared.DTOs;
-
-namespace Interface
+﻿namespace Interface
 {
-    public interface IUserService
+    public interface IUserService<TDto>
+        where TDto : class
     {
-        Task<string> login(UserDto user);
-        Task<string> Register(UserDto user);
-        
+        Task<string> login(TDto dto);
+        Task<string> Register(TDto dto);      
     }
 }

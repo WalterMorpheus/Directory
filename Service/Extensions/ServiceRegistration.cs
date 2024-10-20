@@ -22,15 +22,27 @@ namespace Service.Extensions
             }, ServiceLifetime.Scoped);
 
             /* Custom Logic And Database*/
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IApplicationService, ApplicationService>();
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IApplicationService, ApplicationService>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
+            //services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
+
+            ///*Microsoft Authentication*/
+            //services.AddScoped<ITokenService, TokenService>();
+            //services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+
+
+            services.AddScoped(typeof(IUserService<>), typeof(UserService<>));
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
             services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
 
             /*Microsoft Authentication*/
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped(typeof(ITokenService<>), typeof(TokenService<>));
+            services.AddScoped(typeof(IAuthenticationService<>), typeof(AuthenticationService<>));
 
             /*3rd part*/
             services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(DomainProfile));     

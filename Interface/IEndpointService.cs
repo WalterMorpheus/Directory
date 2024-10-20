@@ -7,7 +7,7 @@ namespace Interface
         where TDto : Standard
     {
         Task<ActionResult<bool>> AddAsync(TDto dto);
-        Task<ActionResult<IEnumerable<TDto>>> listAsync();
+        Task<ActionResult<IEnumerable<TDto>>> ListAsync();
         Task<ActionResult<bool>> UpdateAsync(TDto dto);
         Task<ActionResult> GetByAlternateID(Guid id);
     }

@@ -1,11 +1,11 @@
 ﻿using Data;
-using Domain.Entity.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Data.Entity.Auth;
 
 namespace Service.Extensions
 {
