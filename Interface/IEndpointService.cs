@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Shared;
+using Domain.Shared;
 
 namespace Interface
 {
@@ -39,7 +39,7 @@ namespace Interface
             }
             return new OkObjectResult(item);
         }
-        public async Task<ActionResult<IEnumerable<Domain>>> listAsync()
+        public async Task<ActionResult<IEnumerable<Domain>>> ListAsync()
         {
             var items = await repository.GetAllAsync();
             if (items == null || !items.Any())
@@ -48,6 +48,7 @@ namespace Interface
             }
             return new OkObjectResult(items);
         }
+
         public async Task<ActionResult<bool>> UpdateAsync(Domain dto)
         {
             var updatedItem = await repository.UpdateAsync(dto);

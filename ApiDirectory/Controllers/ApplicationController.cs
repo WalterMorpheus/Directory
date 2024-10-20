@@ -1,13 +1,11 @@
-﻿
-
+﻿using Domain.DTOs;
 using Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.DTOs;
 
 namespace ApiDirectory.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ApplicationController : BaseApiController
     {
         private readonly IEndpointService<ApplicationDto> _endpointService;
@@ -31,7 +29,7 @@ namespace ApiDirectory.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> List()
         {
-            var result = await _endpointService.listAsync();
+            var result = await _endpointService.ListAsync();
             return result.Result;
         }
 

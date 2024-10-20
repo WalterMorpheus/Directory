@@ -1,6 +1,6 @@
-﻿using Shared.Shared;
+﻿using Domain.Shared;
 
-namespace Shared.DTOs 
+namespace Domain.DTOs 
 { 
     public class ApplicationDto: Standard
     {

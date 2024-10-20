@@ -19,7 +19,6 @@ namespace Service
 
         public async Task<IEnumerable<TDto>> GetAllAsync()
         {
-            TEntity entity = _mapper.Map<TEntity>(TDto);
             var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
             return await repository.GetAllAsync();
         }

@@ -35,7 +35,7 @@ namespace Service.Extensions
 
 
             services.AddScoped(typeof(IUserService<>), typeof(UserService<>));
-            services.AddScoped(typeof(IService<>), typeof(Service<>));
+            //services.AddScoped(typeof(IApplicationService<>), typeof(Service<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
             services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
