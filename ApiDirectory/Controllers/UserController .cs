@@ -1,13 +1,13 @@
-﻿using Interface;
+﻿using Domain.DTOs;
+using Interface;
 using Microsoft.AspNetCore.Mvc;
-using Shared.DTOs;
 
 namespace ApiDirectory.Controllers
 {
     public class UserController : BaseApiController, IUserEndpointService<UserDto>
     {
-        private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IUserService<UserDto> _userService;
+        public UserController(IUserService<UserDto> userService)
         {
             _userService = userService;
         }

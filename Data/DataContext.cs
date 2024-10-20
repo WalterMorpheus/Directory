@@ -1,5 +1,5 @@
-﻿using Data.Seed;
-using Domain.Entity.Auth;
+﻿using Data.Entity.Auth;
+using Data.Seed;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { TextInputComponent } from './form/text-input/text-input.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ApplicationComponent } from './application/application.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HomeComponent,
     TextInputComponent,
     DashboardComponent,
+    ApplicationComponent,
   ],
   imports: [
     BrowserModule,

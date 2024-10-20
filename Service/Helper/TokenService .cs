@@ -1,5 +1,4 @@
-﻿using Domain.Entity.Auth;
-using Data;
+﻿using Data;
 using Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -7,11 +6,13 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Shared.DTOs;
+using Domain.DTOs;
+using Data.Entity.Auth;
 
 namespace Service.Helper
 {
-    public class TokenService : ITokenService
+    public class TokenService<TDto> : ITokenService<UserDto> 
+        where TDto : class
     {
         private readonly SymmetricSecurityKey _key;
         private readonly UserManager<User> _userManager;
@@ -33,7 +34,8 @@ namespace Service.Helper
 
             var claims = new List<Claim>
             {
-                new Claim("AlternateId",user.AlternateId.ToString())
+                new Claim("User AlternateId",user.AlternateId.ToString()),
+                new Claim("Customer AlternateId",user.UserCustomers.FirstOrDefault().Customer.AlternateId.ToString())
             };
 
             claims.AddRange((await _userManager.GetRolesAsync(user)).Select(x => new Claim(ClaimTypes.Role, x)));

@@ -1,4 +1,5 @@
-﻿using Interface;
+﻿using AutoMapper;
+using Interface;
 using System.Linq.Expressions;
 
 namespace Service
@@ -8,14 +9,17 @@ namespace Service
         where TEntity : class
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public GenericService(IUnitOfWork unitOfWork)
+        public GenericService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<TDto>> GetAllAsync()
         {
+            TEntity entity = _mapper.Map<TEntity>(TDto);
             var repository = _unitOfWork.GetRepository<TDto, TEntity, TKey>();
             return await repository.GetAllAsync();
         }

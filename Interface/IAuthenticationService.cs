@@ -1,9 +1,8 @@
-﻿using Shared.DTOs;
-
-namespace Interface
+﻿namespace Interface
 {
-    public interface IAuthenticationService
+    public interface IAuthenticationService <TDto>
+        where TDto : class
     {
-        Task AddAsync(UserDto dto);
+        Task AddAsync(TDto dto);
     }
 }

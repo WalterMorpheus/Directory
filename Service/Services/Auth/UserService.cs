@@ -1,15 +1,16 @@
-﻿using Domain.Entity.Auth;
+﻿using Data.Entity.Auth;
+using Domain.DTOs;
 using Interface;
-using Shared.DTOs;
 
 namespace Service.Services.Auth
 {
-    public class UserService : IUserService
+    public class UserService <TDto> : IUserService <UserDto>
+          where TDto : class
     {
         private readonly IGenericService<UserDto,User, int> _userService;
-        private readonly ITokenService _tokenService;
-        private readonly IAuthenticationService _authenticationService;
-        public UserService(IGenericService<UserDto,User, int> userService, ITokenService tokenService, IAuthenticationService authenticationService)
+        private readonly ITokenService<UserDto> _tokenService;
+        private readonly IAuthenticationService<UserDto> _authenticationService;
+        public UserService(IGenericService<UserDto,User, int> userService, ITokenService<UserDto> tokenService, IAuthenticationService<UserDto> authenticationService)
         {
             _userService = userService;
             _tokenService = tokenService;

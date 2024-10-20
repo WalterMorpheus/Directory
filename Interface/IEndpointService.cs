@@ -7,7 +7,7 @@ namespace Interface
     {
         Task<ActionResult<TDto>> GetAsync(int id);
         Task<ActionResult<bool>> AddAsync(TDto dto);
-        Task<ActionResult<IEnumerable<TDto>>> listAsync();
+        Task<ActionResult<IEnumerable<TDto>>> ListAsync();
         Task<ActionResult<bool>> UpdateAsync(TDto dto);
     }
 }

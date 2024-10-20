@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Entity.Core
+namespace Data.Entity.Core
 {
     [Table("business_area")]
     public class BusinessArea
@@ -9,7 +9,8 @@ namespace Domain.Entity.Core
         [Key]
         public int Id { get; set; }
         [Required]
-        public Guid AlternateId { get; set; } = Guid.NewGuid();
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid AlternateId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -21,7 +22,7 @@ namespace Domain.Entity.Core
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = "api";
         public DateTime UpdateDate { get; set; }
         public string UpdateBy { get; set; }
         public bool IsDeleted { get; set; }

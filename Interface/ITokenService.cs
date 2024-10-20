@@ -1,9 +1,8 @@
-﻿using Shared.DTOs;
-
-namespace Interface
+﻿namespace Interface
 {
-    public interface ITokenService
+    public interface ITokenService<TDto>
+        where TDto : class
     {
-        Task<string> CreateToken(UserDto userDto);
+        Task<string> CreateToken(TDto dto);
     }
 }

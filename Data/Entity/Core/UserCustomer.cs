@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Domain.Entity.Auth;
+using Data.Entity.Auth;
 
-namespace Domain.Entity.Core
+namespace Data.Entity.Core
 {
     [Table("user_customer")]
     public class UserCustomer

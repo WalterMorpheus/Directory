@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Entity.Core
+namespace Data.Entity.Core
 {
     [Table("person")]
     public class Person
@@ -9,7 +9,8 @@ namespace Domain.Entity.Core
         [Key]
         public int Id { get; set; }
         [Required]
-        public Guid AlternateId { get; set; } = Guid.NewGuid();
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid AlternateId { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
