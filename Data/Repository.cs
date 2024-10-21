@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
 using Microsoft.EntityFrameworkCore;
 using Interface;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Data
 {
@@ -53,7 +54,24 @@ namespace Data
         }
         public async Task<TDto> UpdateAsync(TDto dto)
         {
-            TEntity entity = _mapper.Map<TEntity>(dto);
+            string username = typeof(TDto).GetProperty("UserAlternateId")?.GetValue(dto)?.ToString();
+            Guid alternateId = Guid.Parse(typeof(TDto).GetProperty("AlternateId")?.GetValue(dto)?.ToString());
+
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new InvalidOperationException("User cannot be null or empty.");
+            }
+            TEntity entity = await _dbSet.FirstOrDefaultAsync(e => EF.Property<string>(e, "AlternateId").Equals(alternateId));
+            if (entity == null)
+            {
+                throw new InvalidOperationException($"Entity with alternateId = {alternateId} was not found.");
+            }
+            _mapper.Map(dto, entity);
+
+            EntityEntry trackedEntity = _context.Entry(entity);
+            trackedEntity.Property("UpdateDate").CurrentValue = DateTime.UtcNow;
+            trackedEntity.Property("UpdateBy").CurrentValue = username;
+
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
             return _mapper.Map<TDto>(entity);

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.Shared
+﻿namespace Shared.Shared
 {
     public class Standard
     {
-        public Guid AlternateId { get; set; }
+        public Guid AlternateId { get; set; } = Guid.NewGuid();
+        public Guid UserAlternateId { get; set; } = Guid.Parse("677ee02d-8207-46ac-bfc9-2b234d9461d0");
     }
 }

@@ -2,9 +2,8 @@
 
 namespace Shared.DTOs 
 { 
-    public class ApplicationDto
+    public class ApplicationDto: Standard
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
