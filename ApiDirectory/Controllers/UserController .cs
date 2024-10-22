@@ -1,6 +1,6 @@
-﻿using Interface;
+﻿using Domain.DTOs.External;
+using Interface;
 using Microsoft.AspNetCore.Mvc;
-using Shared.DTOs;
 
 namespace ApiDirectory.Controllers
 {
@@ -14,7 +14,7 @@ namespace ApiDirectory.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<object>> LoginAsync(UserDto dto) 
         {
-            return new { token = await _userService.login(dto) }; 
+            return new { token = await _userService.Login(dto) }; 
         }
         [HttpPost("register")]
         public async Task<ActionResult<object>> RegisterAsync(UserDto dto)

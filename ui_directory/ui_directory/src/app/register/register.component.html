@@ -17,7 +17,17 @@
           Valid email is required
         </div>
       </div>
-  
+
+      <div class="form-group">
+        <select class="form-select" id="applicationSelect" formControlName="applicationSelect">
+          <option [ngValue]="-1" disabled selected>Select an application</option>
+          <option *ngFor="let source of applications" [value]="source.alternateId">
+            {{ source.name }}
+          </option>
+        </select>
+
+      </div>
+
       <div class="form-group">
         <input id="customer" type="text" formControlName="customer" class="form-control" placeholder="Enter customer name" />
         <div *ngIf="registerForm.controls['customer'].invalid && registerForm.controls['customer'].touched" class="error">

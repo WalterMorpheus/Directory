@@ -20,6 +20,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	  <ProjectReference Include="..\Interface\Interface.csproj" />
-	  <ProjectReference Include="..\Shared\Shared.csproj" />
 	</ItemGroup>
 </Project>

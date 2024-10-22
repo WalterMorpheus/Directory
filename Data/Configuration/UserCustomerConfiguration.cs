@@ -8,6 +8,10 @@ namespace Data.EntityTypeConfiguration
     {
         public void Configure(EntityTypeBuilder<UserCustomer> builder)
         {
+
+            builder.HasKey(ca => new { ca.UserId, ca.CustomerId });
+
+
             builder.HasOne(x => x.User)
                    .WithMany(x => x.UserCustomers)
                    .HasForeignKey(x => x.UserId)

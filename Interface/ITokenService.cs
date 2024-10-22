@@ -1,4 +1,4 @@
-﻿using Shared.DTOs;
+﻿using Domain.DTOs.External;
 
 namespace Interface
 {

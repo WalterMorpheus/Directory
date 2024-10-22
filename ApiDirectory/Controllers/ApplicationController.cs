@@ -1,8 +1,8 @@
 ﻿using ApiDirectory.Controllers;
+using Domain.DTOs.External;
 using Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.DTOs;
 
 [Authorize]
 public class ApplicationController : BaseApiController, IEndpointService<ApplicationDto>

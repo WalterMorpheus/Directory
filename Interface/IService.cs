@@ -1,6 +1,4 @@
-﻿using Shared.DTOs;
-
-namespace Interface 
+﻿namespace Interface 
 {
     public interface IService<TDto>
         where TDto : class

@@ -296,7 +296,6 @@ namespace Data.Migrations
                 {
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
                     ApplicationId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false)
                 },
@@ -351,16 +350,15 @@ namespace Data.Migrations
                 name: "user_customer",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_customer", x => x.Id);
+                    table.PrimaryKey("PK_user_customer", x => new { x.UserId, x.CustomerId });
                     table.ForeignKey(
                         name: "FK_user_customer_asp_net_users_UserId",
                         column: x => x.UserId,
@@ -459,9 +457,9 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "CreatedBy", "CreatedDate", "DeleteDate", "IsDeleted", "Name", "UpdateBy", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new Guid("5a74be5b-725d-40ec-b289-e505373a2f7b"), "api", new DateTime(2024, 10, 21, 9, 52, 49, 160, DateTimeKind.Utc).AddTicks(4572), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Mobile", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new Guid("bc5041ae-9287-476d-84ea-00118e7b65c4"), "api", new DateTime(2024, 10, 21, 9, 52, 49, 160, DateTimeKind.Utc).AddTicks(4575), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Usage", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new Guid("06034bc9-725b-452a-a65e-2e24c6ebacd3"), "api", new DateTime(2024, 10, 21, 9, 52, 49, 160, DateTimeKind.Utc).AddTicks(4576), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "On-bill", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, new Guid("1d05aa00-ed08-4b68-ae87-693d6a01704a"), "api", new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3326), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Mobile", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, new Guid("06e85d0e-8f68-41a8-9169-06c3f329a8b5"), "api", new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3329), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Usage", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, new Guid("09827a03-4997-4662-9e45-e549281ff149"), "api", new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3330), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "On-bill", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -469,8 +467,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, new Guid("2a5b336b-addd-4fca-97ed-b397d8218abc"), "c73057b3-90f0-4cae-8568-5a512cda58be", "Admin", "ADMIN" },
-                    { 2, new Guid("346e65a0-6f6c-409b-b891-888fabdda7b5"), "419e96b4-859a-4f04-b141-30d88017478a", "User", "USER" }
+                    { 1, new Guid("c7ef690e-b66e-4788-bd7f-6f613f63024f"), "680fa4e2-5184-4c92-9bf9-1876308245c7", "Admin", "ADMIN" },
+                    { 2, new Guid("92e89f05-85ee-49a9-8219-3cac6981d4f1"), "9a751a3b-c201-4b09-97f7-51bfe7736511", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -572,11 +570,6 @@ namespace Data.Migrations
                 name: "IX_user_customer_CustomerId",
                 table: "user_customer",
                 column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_user_customer_UserId",
-                table: "user_customer",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

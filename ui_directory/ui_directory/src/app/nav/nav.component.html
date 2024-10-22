@@ -6,16 +6,10 @@
           
           <ng-container *ngIf="userService.currentUser$ |async">
             <li class="nav-item" >
-              <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-            </li>
-            <li class="nav-item" >
-              <a class="nav-link" routerLink="/application" routerLinkActive="active">Application</a>
+              <a class="nav-link"  routerLink="/businessAreas" routerLinkActive="active">Business Areas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"  routerLink="/customer" routerLinkActive="active">Customer</a>
-            </li>
-            <li class="nav-item" >
-              <a class="nav-link"  routerLink="/businessAreas" routerLinkActive="active">Business Areas</a>
+              <a class="nav-link"  routerLink="/person" routerLinkActive="active">Person</a>
             </li>
           </ng-container>
         </ul>

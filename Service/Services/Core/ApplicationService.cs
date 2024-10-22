@@ -1,37 +1,37 @@
-﻿using Domain.Entity.Core;
+﻿using Domain.DTOs.External;
 using Interface;
-using Shared.DTOs;
+using Service.Helper;
 
 namespace Service.Services.Core
 {
     public class ApplicationService<TDto> : IService<ApplicationDto> 
         where TDto : class
     {
-        private readonly IGenericService<ApplicationDto, Application, int> _genericService;
+        private readonly ServiceManager _services;
 
-        public ApplicationService(IGenericService<ApplicationDto, Application, int> applicationService)
+        public ApplicationService(ServiceManager services)
         {
-            _genericService = applicationService;
+            _services = services;
         }
 
         public async Task<bool> Add(ApplicationDto dto)
         {
-            return await _genericService.AddAsync(dto) != null;
+            return await _services.ApplicationService.AddAsync(dto) != null;
         }
 
         public async Task<ApplicationDto> Get(int id)
         {
-            return await _genericService.GetByIdAsync(id);
+            return await _services.ApplicationService.GetByIdAsync(id);
         }
 
         public async Task<IEnumerable<ApplicationDto>> List()
         {
-            return await _genericService.GetAllAsync();
+            return await _services.ApplicationService.GetAllAsync();
         }
 
         public async Task<bool> Update(ApplicationDto dto)
         {
-            return await _genericService.UpdateAsync(dto) != null;
+            return await _services.ApplicationService.UpdateAsync(dto) != null;
         }
     }
 }

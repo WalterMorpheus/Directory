@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241021095249_v_100820241120_db")]
+    [Migration("20241022120337_v_100820241120_db")]
     partial class v_100820241120_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,16 +108,16 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("2a5b336b-addd-4fca-97ed-b397d8218abc"),
-                            ConcurrencyStamp = "c73057b3-90f0-4cae-8568-5a512cda58be",
+                            AlternateId = new Guid("c7ef690e-b66e-4788-bd7f-6f613f63024f"),
+                            ConcurrencyStamp = "680fa4e2-5184-4c92-9bf9-1876308245c7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("346e65a0-6f6c-409b-b891-888fabdda7b5"),
-                            ConcurrencyStamp = "419e96b4-859a-4f04-b141-30d88017478a",
+                            AlternateId = new Guid("92e89f05-85ee-49a9-8219-3cac6981d4f1"),
+                            ConcurrencyStamp = "9a751a3b-c201-4b09-97f7-51bfe7736511",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -323,9 +323,9 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("5a74be5b-725d-40ec-b289-e505373a2f7b"),
+                            AlternateId = new Guid("1d05aa00-ed08-4b68-ae87-693d6a01704a"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 21, 9, 52, 49, 160, DateTimeKind.Utc).AddTicks(4572),
+                            CreatedDate = new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3326),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Mobile",
@@ -334,9 +334,9 @@ namespace Data.Migrations
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("bc5041ae-9287-476d-84ea-00118e7b65c4"),
+                            AlternateId = new Guid("06e85d0e-8f68-41a8-9169-06c3f329a8b5"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 21, 9, 52, 49, 160, DateTimeKind.Utc).AddTicks(4575),
+                            CreatedDate = new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3329),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Usage",
@@ -345,9 +345,9 @@ namespace Data.Migrations
                         new
                         {
                             Id = 3,
-                            AlternateId = new Guid("06034bc9-725b-452a-a65e-2e24c6ebacd3"),
+                            AlternateId = new Guid("09827a03-4997-4662-9e45-e549281ff149"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 21, 9, 52, 49, 160, DateTimeKind.Utc).AddTicks(4576),
+                            CreatedDate = new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3330),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "On-bill",
@@ -553,9 +553,6 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
-
                     b.HasKey("CustomerId", "ApplicationId");
 
                     b.HasIndex("ApplicationId");
@@ -664,11 +661,11 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Entity.Core.UserCustomer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -677,17 +674,12 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("Id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "CustomerId");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("user_customer");
                 });

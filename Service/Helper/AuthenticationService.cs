@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Domain.DTOs.External;
 using Domain.Entity.Auth;
 using Interface;
 using Microsoft.AspNetCore.Identity;
-using Shared.DTOs;
 
 namespace Service.Helper
 {

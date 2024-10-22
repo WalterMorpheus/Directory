@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Shared.DTOs;
+using Domain.DTOs.External;
 
 namespace Service.Helper
 {

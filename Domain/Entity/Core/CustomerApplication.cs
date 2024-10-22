@@ -6,8 +6,6 @@ namespace Domain.Entity.Core
     [Table("customer_application")]
     public class CustomerApplication
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
@@ -17,8 +15,6 @@ namespace Domain.Entity.Core
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]
-        public string CreatedBy { get; set; }
-
-
+        public string CreatedBy { get; set; } = string.Empty;   
     }
 }

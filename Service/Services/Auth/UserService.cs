@@ -1,31 +1,56 @@
-﻿using Domain.Entity.Auth;
+﻿using Domain.DTOs.External;
+using Domain.DTOs.Interanal;
 using Interface;
-using Shared.DTOs;
+using Service.Helper;
 
 namespace Service.Services.Auth
 {
     public class UserService : IUserService
     {
-        private readonly IGenericService<UserDto,User, int> _userService;
-        private readonly ITokenService _tokenService;
-        private readonly IAuthenticationService _authenticationService;
-        public UserService(IGenericService<UserDto,User, int> userService, ITokenService tokenService, IAuthenticationService authenticationService)
+        private readonly ServiceManager _services;
+
+        public UserService(ServiceManager services)
         {
-            _userService = userService;
-            _tokenService = tokenService;
-            _authenticationService = authenticationService;
+            _services = services;
         }
-        public async Task<string> login(UserDto dto)
+
+        public async Task<string> Login(UserDto dto)
         {
-            return await _tokenService.CreateToken(dto);
+            return await _services.TokenService.CreateToken(dto);
         }
+
         public async Task<string> Register(UserDto dto)
         {
-            if ( await _userService.GetByReferenceAsync(u => u.UserName == dto.UserName) != null)
+            if (await _services.UserService.GetByReferenceAsync(u => u.UserName == dto.UserName) != null)
                 throw new InvalidOperationException("A user with the same credentials already exists");
 
-            await _authenticationService.AddAsync(dto);
-            return await _tokenService.CreateToken(dto);
+            if (await _services.CustomerDtoService.GetByReferenceAsync(u => u.Name == dto.CustomerName) != null)
+                throw new InvalidOperationException("A customer with the same name already exists");
+
+            if (await _services.ApplicationService.GetByReferenceAsync(u => u.AlternateId == dto.ApplicationAlternateId) == null)
+                throw new InvalidOperationException("Application does not exist");
+
+            await _services.AuthenticationService.AddAsync(dto);
+            await _services.CustomerDtoService.AddAsync(new CustomerDto { Name = dto.CustomerName });
+
+            IntApplicationDto intApplicationDto = await _services.IntApplicationDtoService.GetByReferenceAsync(u => u.AlternateId == dto.ApplicationAlternateId);
+            IntCustomerDto intCustomerDto = await _services.IntCustomerService.GetByReferenceAsync(u => u.Name == dto.CustomerName);
+            IntUserDto intUserDto = await _services.IntUserService.GetByReferenceAsync(u => u.UserName == dto.UserName);
+
+            await _services.CustomerApplicationService.AddAsync(new CustomerApplicationDto
+            {
+                ApplicationId = intApplicationDto.Id,
+                CustomerId = intCustomerDto.Id
+            });
+
+            await _services.UserCustomerService.AddAsync(new UserCustomerDto
+            {
+                UserId = intUserDto.Id,
+                CustomerId = intCustomerDto.Id
+            });
+
+            return await _services.TokenService.CreateToken(dto);
         }
     }
+
 }
