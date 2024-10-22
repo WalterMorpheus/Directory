@@ -8,15 +8,17 @@ namespace Service.Services.Auth
     public class UserService : IUserService
     {
         private readonly ServiceManager _services;
+        private readonly ITokenService _tokenService;
 
-        public UserService(ServiceManager services)
+        public UserService(ServiceManager services,ITokenService tokenService)
         {
             _services = services;
+            _tokenService = tokenService;
         }
 
         public async Task<string> Login(UserDto dto)
         {
-            return await _services.TokenService.CreateToken(dto);
+            return await _tokenService.CreateToken(dto);
         }
 
         public async Task<string> Register(UserDto dto)
@@ -49,7 +51,7 @@ namespace Service.Services.Auth
                 CustomerId = intCustomerDto.Id
             });
 
-            return await _services.TokenService.CreateToken(dto);
+            return await _tokenService.CreateToken(dto);
         }
     }
 

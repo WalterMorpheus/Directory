@@ -16,6 +16,7 @@ namespace Service.Services.Core
 
         public async Task<bool> Add(ApplicationDto dto)
         {
+            var test = _services.HttpContextAccessorService.HttpContext?.User;
             return await _services.ApplicationService.AddAsync(dto) != null;
         }
 

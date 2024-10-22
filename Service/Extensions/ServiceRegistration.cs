@@ -30,6 +30,7 @@ namespace Service.Extensions
             /* Microsoft Authentication */
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddHttpContextAccessor();
 
             /* Custom Logic And Database */
             services.AddScoped<IUserService, UserService>();
@@ -37,6 +38,7 @@ namespace Service.Extensions
 
             /* 3rd Party */
             services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(DomainProfile));
+   
 
             return services;
         }

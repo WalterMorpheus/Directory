@@ -1,8 +1,10 @@
 ﻿using ApiDirectory.Controllers;
+using Domain.Auth;
 using Domain.DTOs.External;
 using Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Service.Extensions;
 
 [Authorize]
 public class ApplicationController : BaseApiController, IEndpointService<ApplicationDto>
@@ -16,6 +18,7 @@ public class ApplicationController : BaseApiController, IEndpointService<Applica
     [HttpPost("add")]
     public async Task<ActionResult<bool>> AddAsync(ApplicationDto dto)
     {
+        UserClaims userClaims = User.GetUserToken();
         return await _service.Add(dto);
     }
     [AllowAnonymous]

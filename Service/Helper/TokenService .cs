@@ -8,6 +8,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Domain.DTOs.External;
+using Domain.DTOs.Interanal;
 
 namespace Service.Helper
 {
@@ -16,12 +17,14 @@ namespace Service.Helper
         private readonly SymmetricSecurityKey _key;
         private readonly UserManager<User> _userManager;
         private readonly DataContext _context;
+        private readonly ServiceManager _services;
 
-        public TokenService(IConfiguration config, UserManager<User> userManager, DataContext context)
+        public TokenService(IConfiguration config, UserManager<User> userManager, DataContext context, ServiceManager services)
         {
             _context = context;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             _userManager = userManager;
+            _services = services;   
         }
         public async Task<string> CreateToken(UserDto dto)
         {
@@ -31,9 +34,16 @@ namespace Service.Helper
                 throw new InvalidOperationException("username or password is incorrect");
             }
 
+            UserCustomerDto userCustomerDto = await _services.UserCustomerService.GetByReferenceAsync(x => x.UserId == user.Id);
+            CustomerApplicationDto customerApplicationDto = await _services.CustomerApplicationService.GetByReferenceAsync(x => x.CustomerId == userCustomerDto.CustomerId);
+            IntCustomerDto intCustomerDto = await _services.IntCustomerService.GetByReferenceAsync(x => x.Id == customerApplicationDto.CustomerId);
+            IntApplicationDto intApplicationDto = await _services.IntApplicationDtoService.GetByReferenceAsync(x => x.Id == customerApplicationDto.ApplicationId);
+
             var claims = new List<Claim>
             {
-                new Claim("AlternateId",user.AlternateId.ToString())
+                new Claim("UserAlternateId",user.AlternateId.ToString()),
+                new Claim("ApplicationAlternateId",intApplicationDto.AlternateId.ToString()),
+                new Claim("CustomerAlternateId",intCustomerDto.AlternateId.ToString())
             };
 
             claims.AddRange((await _userManager.GetRolesAsync(user)).Select(x => new Claim(ClaimTypes.Role, x)));

@@ -3,6 +3,7 @@ using Domain.DTOs.Interanal;
 using Domain.Entity.Auth;
 using Domain.Entity.Core;
 using Interface;
+using Microsoft.AspNetCore.Http;
 
 namespace Service.Helper
 {
@@ -16,8 +17,7 @@ namespace Service.Helper
         public IGenericService<IntApplicationDto, Application, int> IntApplicationDtoService { get; }
         public IGenericService<CustomerApplicationDto, CustomerApplication, int> CustomerApplicationService { get; }
         public IGenericService<UserCustomerDto, UserCustomer, int> UserCustomerService { get; }
-
-        public ITokenService TokenService { get; }
+        public IHttpContextAccessor HttpContextAccessorService { get; }
         public IAuthenticationService AuthenticationService { get; }
 
         public ServiceManager(
@@ -29,7 +29,8 @@ namespace Service.Helper
             IGenericService<IntApplicationDto, Application, int> intApplicationDtoService,
             IGenericService<CustomerApplicationDto, CustomerApplication, int> customerApplicationService,
             IGenericService<UserCustomerDto, UserCustomer, int> userCustomerService,
-            ITokenService tokenService,
+
+            IHttpContextAccessor httpContextAccessorService,
             IAuthenticationService authenticationService)
         {
             UserService = userService;
@@ -40,7 +41,7 @@ namespace Service.Helper
             IntApplicationDtoService = intApplicationDtoService;
             CustomerApplicationService = customerApplicationService;
             UserCustomerService = userCustomerService;
-            TokenService = tokenService;
+            HttpContextAccessorService = httpContextAccessorService;    
             AuthenticationService = authenticationService;
         }
     }

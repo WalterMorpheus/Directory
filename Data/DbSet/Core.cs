@@ -1,4 +1,5 @@
-﻿using Domain.Entity.Core;
+﻿using Domain.Entity.Auth;
+using Domain.Entity.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Extensions
@@ -18,5 +19,6 @@ namespace Data.Extensions
         public DbSet<BusinessAreaRelationship> BusinessAreaRelationships { get; set; }
         public DbSet<CustomerBusinessArea> CustomerBusinessAreas { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
