@@ -5,7 +5,9 @@ using Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Service.Collections;
 using Service.Helper;
+using Service.MappingProfiles;
 using Service.Services.Auth;
 using Service.Services.Core;
 
@@ -22,10 +24,8 @@ namespace Service.Extensions
             }, ServiceLifetime.Scoped);
 
             /* Custom Logic And Database */
-            services.AddScoped(typeof(IService<>), typeof(ApplicationService<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<,,>), typeof(Repository<,,>));
-            services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
 
             /* Microsoft Authentication */
             services.AddScoped<ITokenService, TokenService>();
@@ -35,6 +35,10 @@ namespace Service.Extensions
             /* Custom Logic And Database */
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ServiceManager>();
+            services.AddScoped<TokenClaims>();
+            services.AddScoped<MappingProvider>();
+            services.AddScoped(typeof(IService<>), typeof(GenericService<>));
+            services.AddScoped(typeof(GenericService<>));
 
             /* 3rd Party */
             services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(DomainProfile));

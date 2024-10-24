@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       customer: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
-      applicationSelect:[-1]
+      applicationAlternateId:[-1]
     });
 
     this.registerForm.controls['password'].valueChanges.subscribe({

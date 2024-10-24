@@ -19,6 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { TextInputComponent } from './form/text-input/text-input.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
+import { BusinessAreaComponent } from './business-area/business-area.component';
+import { PersonComponent } from './person/person.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { ApplicationComponent } from './application/application.component';
     TextInputComponent,
     DashboardComponent,
     ApplicationComponent,
+    BusinessAreaComponent,
+    PersonComponent,
   ],
   imports: [
     BrowserModule,

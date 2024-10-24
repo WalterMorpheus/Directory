@@ -1,0 +1,80 @@
+<div class="container">
+    <h2>Create Person</h2>
+    <form (ngSubmit)="onSubmit()" #personForm="ngForm">
+      <!-- First Name -->
+      <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          class="form-control"
+          [(ngModel)]="person.firstName"
+          name="firstName"
+          required
+        />
+      </div>
+  
+      <!-- Last Name -->
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          class="form-control"
+          [(ngModel)]="person.lastName"
+          name="lastName"
+          required
+        />
+      </div>
+  
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="person.email"
+          name="email"
+          required
+        />
+      </div>
+  
+      <!-- Cell Phone Number -->
+      <div class="mb-3">
+        <label for="cellPhone" class="form-label">Cell Phone Number</label>
+        <input
+          type="tel"
+          id="cellPhone"
+          class="form-control"
+          [(ngModel)]="person.cellPhoneNum"
+          name="cellPhone"
+        />
+      </div>
+  
+      <!-- Business Area Dropdown -->
+      <div class="mb-3">
+        <label for="businessArea" class="form-label">Business Area</label>
+        <select
+          class="form-select"
+          id="businessArea"
+          [(ngModel)]="person.businessAreaId"
+          name="businessArea"
+          required
+        >
+          <option *ngFor="let area of businessAreas" [value]="area.id">{{ area.name }}</option>
+        </select>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Create Person</button>
+    </form>
+  
+    <!-- Display Created Persons -->
+    <h2>Created Persons</h2>
+    <ul class="list-group">
+      <li *ngFor="let p of persons" class="list-group-item">
+        {{ p.firstName }} {{ p.lastName }} - {{ p.businessArea.name }}
+      </li>
+    </ul>
+  </div>  

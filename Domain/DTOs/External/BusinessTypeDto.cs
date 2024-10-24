@@ -2,9 +2,8 @@
 
 namespace Domain.DTOs.External
 {
-    public class ApplicationDto : Standard
+    public class BusinessTypeDto: Standard
     {
+
     }
 }
-
-

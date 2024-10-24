@@ -5,5 +5,6 @@ export interface User{
     password: string;
     token: string;
     roles: string[];
-    customer: string
+    customerName: string;
+    applicationAlternateId: string;
 }

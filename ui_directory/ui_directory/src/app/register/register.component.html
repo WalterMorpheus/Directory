@@ -19,7 +19,7 @@
       </div>
 
       <div class="form-group">
-        <select class="form-select" id="applicationSelect" formControlName="applicationSelect">
+        <select class="form-select" id="applicationAlternateId" formControlName="applicationAlternateId">
           <option [ngValue]="-1" disabled selected>Select an application</option>
           <option *ngFor="let source of applications" [value]="source.alternateId">
             {{ source.name }}

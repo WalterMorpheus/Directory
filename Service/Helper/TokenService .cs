@@ -9,6 +9,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Domain.DTOs.External;
 using Domain.DTOs.Interanal;
+using Service.Services.Core;
+using Service.Services.Auth;
 
 namespace Service.Helper
 {
@@ -17,14 +19,42 @@ namespace Service.Helper
         private readonly SymmetricSecurityKey _key;
         private readonly UserManager<User> _userManager;
         private readonly DataContext _context;
-        private readonly ServiceManager _services;
 
-        public TokenService(IConfiguration config, UserManager<User> userManager, DataContext context, ServiceManager services)
+        private readonly GenericService<UserDto> _userService;
+        private readonly GenericService<IntUserDto> _intUserService;
+        private readonly GenericService<CustomerDto> _customerDtoService;
+        private readonly GenericService<IntCustomerDto> _intCustomerService;
+        private readonly GenericService<ApplicationDto> _applicationService;
+        private readonly GenericService<IntApplicationDto> _intApplicationDtoService;
+        private readonly GenericService<CustomerApplicationDto> _customerApplicationService;
+        private readonly GenericService<UserCustomerDto> _userCustomerService;
+        private readonly GenericService<BusinessTypeDto> _businessTypeService;
+
+
+        public TokenService(IConfiguration config, UserManager<User> userManager, DataContext context,GenericService<UserDto> userService,
+            GenericService<IntUserDto> intUserService,
+            GenericService<CustomerDto> customerDtoService,
+            GenericService<IntCustomerDto> intCustomerService,
+            GenericService<ApplicationDto> applicationService,
+            GenericService<IntApplicationDto> intApplicationDtoService,
+            GenericService<CustomerApplicationDto> customerApplicationService,
+            GenericService<UserCustomerDto> userCustomerService,
+            GenericService<BusinessTypeDto> businessTypeService)
         {
             _context = context;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             _userManager = userManager;
-            _services = services;   
+
+
+            _userService = userService;
+            _intUserService = intUserService;
+            _customerDtoService = customerDtoService;
+            _intCustomerService = intCustomerService;
+            _applicationService = applicationService;
+            _intApplicationDtoService = intApplicationDtoService;
+            _customerApplicationService = customerApplicationService;
+            _userCustomerService = userCustomerService;
+            _businessTypeService = businessTypeService;
         }
         public async Task<string> CreateToken(UserDto dto)
         {
@@ -34,10 +64,10 @@ namespace Service.Helper
                 throw new InvalidOperationException("username or password is incorrect");
             }
 
-            UserCustomerDto userCustomerDto = await _services.UserCustomerService.GetByReferenceAsync(x => x.UserId == user.Id);
-            CustomerApplicationDto customerApplicationDto = await _services.CustomerApplicationService.GetByReferenceAsync(x => x.CustomerId == userCustomerDto.CustomerId);
-            IntCustomerDto intCustomerDto = await _services.IntCustomerService.GetByReferenceAsync(x => x.Id == customerApplicationDto.CustomerId);
-            IntApplicationDto intApplicationDto = await _services.IntApplicationDtoService.GetByReferenceAsync(x => x.Id == customerApplicationDto.ApplicationId);
+            UserCustomerDto userCustomerDto = await _userCustomerService.GetByReferenceAsync(x => x.UserId == user.Id);
+            CustomerApplicationDto customerApplicationDto = await _customerApplicationService.GetByReferenceAsync(x => x.CustomerId == userCustomerDto.CustomerId);
+            IntCustomerDto intCustomerDto = await _intCustomerService.GetByReferenceAsync(x => x.Id == customerApplicationDto.CustomerId);
+            IntApplicationDto intApplicationDto = await _intApplicationDtoService.GetByReferenceAsync(x => x.Id == customerApplicationDto.ApplicationId);
 
             var claims = new List<Claim>
             {
