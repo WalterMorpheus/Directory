@@ -1,8 +1,11 @@
-﻿namespace Domain.DTOs.External
+﻿using Domain.Entity.Core;
+using System.ComponentModel.DataAnnotations;
+
+namespace Domain.DTOs.External
 {
     public class CustomerApplicationDto
     {
-        public int CustomerId { get; set; }
-        public int ApplicationId { get; set; }
+        public CustomerDto Customer { get; set; }
+        public ApplicationDto Application { get; set; }
     }
 }

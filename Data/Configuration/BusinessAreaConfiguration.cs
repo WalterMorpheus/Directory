@@ -15,6 +15,8 @@ namespace Data.EntityTypeConfiguration
             builder.HasOne(ba => ba.BusinessAreaType)
                    .WithMany(bat => bat.BusinessAreas)
                    .HasForeignKey(ba => ba.BusinessAreaTypeId);
+            builder.Property(e => e.AlternateId)
+                .HasDefaultValueSql("gen_random_uuid()");
         }
     }
 }

@@ -29,8 +29,8 @@
       </div>
 
       <div class="form-group">
-        <input id="customer" type="text" formControlName="customer" class="form-control" placeholder="Enter customer name" />
-        <div *ngIf="registerForm.controls['customer'].invalid && registerForm.controls['customer'].touched" class="error">
+        <input id="customerName" type="text" formControlName="customerName" class="form-control" placeholder="Enter customer name" />
+        <div *ngIf="registerForm.controls['customerName'].invalid && registerForm.controls['customerName'].touched" class="error">
           Customer is required
         </div>
       </div>

@@ -21,6 +21,9 @@ namespace Data.EntityTypeConfiguration
                    .WithMany(r => r.UserRoles)
                    .HasForeignKey(ur => ur.RoleId)
                    .IsRequired();
+
+            builder.Property(e => e.AlternateId)
+                .HasDefaultValueSql("gen_random_uuid()");
         }
     }
 }

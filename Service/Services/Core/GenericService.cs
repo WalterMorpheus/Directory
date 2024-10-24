@@ -84,10 +84,6 @@ namespace Service.Services.Core
         public async Task<bool> Update(TDto dto)
         {
 
-            var property = dto.GetType().GetProperty("UserAlternateId");
-            if (property != null && property.CanWrite)  
-                property.SetValue(dto, _tokenClaims.UserTokenClaims().UserAlternateId);
-
             var entityType = _mappingProvider.GetEntityType<TDto>();
 
             var repository = GetEntityServiceForType(entityType);

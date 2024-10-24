@@ -1,7 +1,11 @@
-﻿namespace Domain.DTOs.External
+﻿using Domain.Entity.Core;
+using Domain.Shared;
+
+namespace Domain.DTOs.External
 {
-    public class CustomerDto
+    public class CustomerDto: Standard
     {
-        public string Name { get; set; }
+        public ICollection<UserCustomerDto> UserCustomers { get; set; }
+        public ICollection<CustomerApplicationDto> CustomerApplications { get; set; }
     }
 }

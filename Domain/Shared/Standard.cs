@@ -2,9 +2,7 @@
 {
     public class Standard
     {
-        public Guid AlternateId { get; set; } = Guid.NewGuid();
+        public Guid AlternateId { get; set; }
         public string Name { get; set; }
-        public Guid UserAlternateId { get; set; }
-
     }
 }

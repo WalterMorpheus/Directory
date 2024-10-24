@@ -21,7 +21,10 @@ namespace Service.MappingProfiles
                 { typeof(IntCustomerDto), typeof(Customer) },
                 { typeof(IntApplicationDto), typeof(Application) },
                 { typeof(CustomerApplicationDto), typeof(CustomerApplication) },
-                { typeof(UserCustomerDto), typeof(UserCustomer) }
+                { typeof(UserCustomerDto), typeof(UserCustomer) },
+
+                { typeof(UserRoleDto), typeof(UserRole) },
+                { typeof(RoleDto), typeof(Role) }
             };
         }
 

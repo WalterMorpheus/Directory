@@ -10,6 +10,8 @@ namespace Data.EntityTypeConfiguration
         {
             builder.HasIndex(a => a.Name)
                    .IsUnique();
+            builder.Property(e => e.AlternateId)
+                .HasDefaultValueSql("gen_random_uuid()");
         }
     }
 }

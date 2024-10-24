@@ -9,6 +9,8 @@ namespace Data.EntityTypeConfiguration
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("asp_net_users");
+            builder.Property(e => e.AlternateId)
+                   .HasDefaultValueSql("gen_random_uuid()");
         }
     }
 }

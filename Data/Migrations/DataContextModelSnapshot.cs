@@ -31,7 +31,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -61,7 +63,9 @@ namespace Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
@@ -80,7 +84,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -106,16 +112,16 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("c7ef690e-b66e-4788-bd7f-6f613f63024f"),
-                            ConcurrencyStamp = "680fa4e2-5184-4c92-9bf9-1876308245c7",
+                            AlternateId = new Guid("702807f5-ab8b-43c8-b49e-e17f723a8606"),
+                            ConcurrencyStamp = "693d24b6-b29f-4441-b06a-e84638613395",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("92e89f05-85ee-49a9-8219-3cac6981d4f1"),
-                            ConcurrencyStamp = "9a751a3b-c201-4b09-97f7-51bfe7736511",
+                            AlternateId = new Guid("7585ce8a-fb0c-460b-9368-b8966b8224c4"),
+                            ConcurrencyStamp = "f2c917b9-d3c6-4547-a36f-8ab42885d1b2",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -133,7 +139,9 @@ namespace Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -203,7 +211,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -230,7 +240,9 @@ namespace Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
@@ -254,7 +266,9 @@ namespace Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -285,7 +299,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -321,35 +337,35 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("1d05aa00-ed08-4b68-ae87-693d6a01704a"),
+                            AlternateId = new Guid("fe3119ef-28e2-476a-abaa-4531be0edaf8"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3326),
+                            CreatedDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4731),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Mobile",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UpdateDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4733)
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("06e85d0e-8f68-41a8-9169-06c3f329a8b5"),
+                            AlternateId = new Guid("d28a8dee-4c13-4cac-8c6d-ec784fefb6e2"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3329),
+                            CreatedDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4735),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Usage",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UpdateDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4736)
                         },
                         new
                         {
                             Id = 3,
-                            AlternateId = new Guid("09827a03-4997-4662-9e45-e549281ff149"),
+                            AlternateId = new Guid("90af8da1-c170-4f31-a53e-e6faecbd5f2f"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3330),
+                            CreatedDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "On-bill",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UpdateDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737)
                         });
                 });
 
@@ -362,7 +378,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<int>("BusinessAreaTypeId")
                         .HasColumnType("integer");
@@ -436,7 +454,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -503,7 +523,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -585,7 +607,9 @@ namespace Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AlternateId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("CellPhoneNum")
                         .IsRequired()

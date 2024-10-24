@@ -16,7 +16,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
@@ -36,7 +36,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
@@ -52,7 +52,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -80,7 +80,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
@@ -100,7 +100,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
@@ -120,7 +120,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     RoleId = table.Column<int>(type: "integer", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
@@ -142,7 +142,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
@@ -164,7 +164,7 @@ namespace Data.Migrations
                 {
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     ProviderKey = table.Column<string>(type: "text", nullable: false),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -185,7 +185,7 @@ namespace Data.Migrations
                 {
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     RoleId = table.Column<int>(type: "integer", nullable: false),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -215,7 +215,7 @@ namespace Data.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -262,7 +262,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
                     BusinessAreaTypeId = table.Column<int>(type: "integer", nullable: false),
@@ -322,7 +322,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlternateId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
@@ -457,9 +457,9 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "CreatedBy", "CreatedDate", "DeleteDate", "IsDeleted", "Name", "UpdateBy", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new Guid("1d05aa00-ed08-4b68-ae87-693d6a01704a"), "api", new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3326), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Mobile", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new Guid("06e85d0e-8f68-41a8-9169-06c3f329a8b5"), "api", new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3329), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Usage", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new Guid("09827a03-4997-4662-9e45-e549281ff149"), "api", new DateTime(2024, 10, 22, 12, 3, 37, 478, DateTimeKind.Utc).AddTicks(3330), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "On-bill", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, new Guid("fe3119ef-28e2-476a-abaa-4531be0edaf8"), "api", new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4731), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Mobile", null, new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4733) },
+                    { 2, new Guid("d28a8dee-4c13-4cac-8c6d-ec784fefb6e2"), "api", new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4735), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Usage", null, new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4736) },
+                    { 3, new Guid("90af8da1-c170-4f31-a53e-e6faecbd5f2f"), "api", new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "On-bill", null, new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737) }
                 });
 
             migrationBuilder.InsertData(
@@ -467,8 +467,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, new Guid("c7ef690e-b66e-4788-bd7f-6f613f63024f"), "680fa4e2-5184-4c92-9bf9-1876308245c7", "Admin", "ADMIN" },
-                    { 2, new Guid("92e89f05-85ee-49a9-8219-3cac6981d4f1"), "9a751a3b-c201-4b09-97f7-51bfe7736511", "User", "USER" }
+                    { 1, new Guid("702807f5-ab8b-43c8-b49e-e17f723a8606"), "693d24b6-b29f-4441-b06a-e84638613395", "Admin", "ADMIN" },
+                    { 2, new Guid("7585ce8a-fb0c-460b-9368-b8966b8224c4"), "f2c917b9-d3c6-4547-a36f-8ab42885d1b2", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -39,12 +39,17 @@ namespace Data
             IEnumerable<TEntity> entities = await _dbSet.ToListAsync();
             return _mapper.Map<IEnumerable<TDto>>(entities);
         }
+
         public async Task<TDto> GetByReferenceAsync(Expression<Func<TDto, bool>> predicate)
         {
             var entityPredicate = _mapper.MapExpression<Expression<Func<TEntity, bool>>>(predicate);
-            var entity = await _dbSet.FirstOrDefaultAsync(entityPredicate);
+            IQueryable<TEntity> query = _dbSet.AsQueryable();
+            query = query.IncludeRelatedEntities<TEntity, TDto>();
+
+            var entity = await query.FirstOrDefaultAsync(entityPredicate);
             return _mapper.Map<TDto>(entity);
         }
+
 
         public async Task<IEnumerable<TDto>> GetListByParametersAsync(Expression<Func<TDto, bool>> predicate)
         {
