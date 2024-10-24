@@ -1,9 +1,10 @@
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment.development';
+import { Application } from '../models/application';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(this.baseUrl + "user/applications");
+  }
 
   login(model: any){
-    return this.http.post<User>(this.baseUrl + 'user/login',model).pipe(
+    return this.http.post<User>(this.baseUrl + 'User/login',model).pipe(
       map((response: User) =>{
         const user = response;
         if(user){

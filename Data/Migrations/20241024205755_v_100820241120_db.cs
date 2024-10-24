@@ -291,32 +291,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "customer_application",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "integer", nullable: false),
-                    ApplicationId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_customer_application", x => new { x.CustomerId, x.ApplicationId });
-                    table.ForeignKey(
-                        name: "FK_customer_application_application_ApplicationId",
-                        column: x => x.ApplicationId,
-                        principalTable: "application",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_customer_application_customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "person",
                 columns: table => new
                 {
@@ -347,26 +321,34 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_customer",
+                name: "user_customer_application",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
+                    ApplicationId = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_customer", x => new { x.UserId, x.CustomerId });
+                    table.PrimaryKey("PK_user_customer_application", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_user_customer_asp_net_users_UserId",
+                        name: "FK_user_customer_application_application_ApplicationId",
+                        column: x => x.ApplicationId,
+                        principalTable: "application",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_user_customer_application_asp_net_users_UserId",
                         column: x => x.UserId,
                         principalTable: "asp_net_users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_customer_customer_CustomerId",
+                        name: "FK_user_customer_application_customer_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "customer",
                         principalColumn: "Id",
@@ -457,9 +439,9 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "CreatedBy", "CreatedDate", "DeleteDate", "IsDeleted", "Name", "UpdateBy", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new Guid("fe3119ef-28e2-476a-abaa-4531be0edaf8"), "api", new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4731), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Mobile", null, new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4733) },
-                    { 2, new Guid("d28a8dee-4c13-4cac-8c6d-ec784fefb6e2"), "api", new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4735), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Usage", null, new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4736) },
-                    { 3, new Guid("90af8da1-c170-4f31-a53e-e6faecbd5f2f"), "api", new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "On-bill", null, new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737) }
+                    { 1, new Guid("de19fb14-8fb5-4681-bc5a-b909f7829bbc"), "api", new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7747), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Mobile", null, new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7749) },
+                    { 2, new Guid("32eaa933-fd94-4800-a424-dedbe3749465"), "api", new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7751), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Usage", null, new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7751) },
+                    { 3, new Guid("79b66c61-ae87-44da-9988-46a037ca2370"), "api", new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7752), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "On-bill", null, new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7753) }
                 });
 
             migrationBuilder.InsertData(
@@ -467,8 +449,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AlternateId", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, new Guid("702807f5-ab8b-43c8-b49e-e17f723a8606"), "693d24b6-b29f-4441-b06a-e84638613395", "Admin", "ADMIN" },
-                    { 2, new Guid("7585ce8a-fb0c-460b-9368-b8966b8224c4"), "f2c917b9-d3c6-4547-a36f-8ab42885d1b2", "User", "USER" }
+                    { 1, new Guid("6845c065-2942-4b6c-ab2b-7ac22396233a"), "1924bca3-d3c7-46d9-b757-8d703e0c7a01", "Admin", "ADMIN" },
+                    { 2, new Guid("2ff0eb44-4c8f-45b1-99cb-f129757c7424"), "aa6b776a-7c78-49c1-921b-228e292cbb39", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -547,11 +529,6 @@ namespace Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_customer_application_ApplicationId",
-                table: "customer_application",
-                column: "ApplicationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_customer_business_area_BusinessAreaId",
                 table: "customer_business_area",
                 column: "BusinessAreaId");
@@ -567,9 +544,19 @@ namespace Data.Migrations
                 column: "BusinessAreaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_customer_CustomerId",
-                table: "user_customer",
+                name: "IX_user_customer_application_ApplicationId",
+                table: "user_customer_application",
+                column: "ApplicationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_customer_application_CustomerId",
+                table: "user_customer_application",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_customer_application_UserId",
+                table: "user_customer_application",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -596,28 +583,25 @@ namespace Data.Migrations
                 name: "business_area_type_relationship");
 
             migrationBuilder.DropTable(
-                name: "customer_application");
-
-            migrationBuilder.DropTable(
                 name: "customer_business_area");
 
             migrationBuilder.DropTable(
                 name: "person_business_area");
 
             migrationBuilder.DropTable(
-                name: "user_customer");
+                name: "user_customer_application");
 
             migrationBuilder.DropTable(
                 name: "asp_net_roles");
-
-            migrationBuilder.DropTable(
-                name: "application");
 
             migrationBuilder.DropTable(
                 name: "business_area");
 
             migrationBuilder.DropTable(
                 name: "person");
+
+            migrationBuilder.DropTable(
+                name: "application");
 
             migrationBuilder.DropTable(
                 name: "asp_net_users");

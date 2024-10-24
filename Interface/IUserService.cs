@@ -6,6 +6,7 @@ namespace Interface
     {
         Task<string> Login(UserDto user);
         Task<string> Register(UserDto user);
-        
+        Task<List<ApplicationDto>> Applications();
+
     }
 }

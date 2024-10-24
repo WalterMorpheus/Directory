@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Domain.DTOs.External;
 using Service.Services.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service.Helper
 {
@@ -29,7 +30,7 @@ namespace Service.Helper
         }
         public async Task<string> CreateToken(UserDto dto)
         {
-            var user = _context.Users.FirstOrDefault(x=>x.UserName == dto.UserName);
+            var user = await _context.Users.FirstOrDefaultAsync(x=>x.UserName == dto.UserName);
             if (!await _userManager.CheckPasswordAsync(user, dto.Password))
             {
                 throw new InvalidOperationException("username or password is incorrect");
@@ -39,8 +40,9 @@ namespace Service.Helper
 
             var claims = new List<Claim>
             {
-                new Claim("UserAlternateId",userDto.AlternateId.ToString()),
-                new Claim("CustomerAlternateId",userDto.UserCustomers.FirstOrDefault().Customer.AlternateId.ToString())
+               new Claim("UserAlternateId",userDto.AlternateId.ToString()),
+               new Claim("CustomerAlternateId",userDto.UserCustomerApplications.FirstOrDefault().Customer.AlternateId.ToString()),
+               new Claim("ApplicationrAlternateId",userDto.UserCustomerApplications.FirstOrDefault().Customer.AlternateId.ToString())
             };
 
             claims.AddRange((await _userManager.GetRolesAsync(user)).Select(x => new Claim(ClaimTypes.Role, x)));

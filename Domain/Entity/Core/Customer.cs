@@ -19,10 +19,9 @@ namespace Domain.Entity.Core
         public string UpdateBy { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DeleteDate { get; set; }
-        public ICollection<CustomerApplication> CustomerApplications { get; set; }
         public ICollection<BusinessArea> BusinessAreas { get; set; }
         public ICollection<CustomerBusinessArea> CustomerBusinessAreas { get; set; }
-        public ICollection<UserCustomer> UserCustomers { get; set; }
+        public ICollection<UserCustomerApplication> UserCustomerApplications { get; set; }
         public ICollection<Person> People { get; set; }
     }
 }

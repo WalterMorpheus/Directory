@@ -21,7 +21,7 @@
       <div class="form-group">
         <select class="form-select" id="applicationAlternateId" formControlName="applicationAlternateId">
           <option [ngValue]="-1" disabled selected>Select an application</option>
-          <option *ngFor="let source of applications" [value]="source.alternateId">
+          <option *ngFor="let source of applications" [value]="source.id">
             {{ source.name }}
           </option>
         </select>

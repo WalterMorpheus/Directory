@@ -7,15 +7,20 @@ namespace Service.Services.Auth
 {
     public class UserService : IUserService
     {
-        private readonly GenericService<CustomerApplicationDto> _customerApplicationService;
+        private readonly GenericService<ApplicationDto> _applicationDtoService;
         private readonly ITokenService _tokenService;
         private readonly ServiceManager _serviceManager;
 
-        public UserService(ITokenService tokenService,GenericService<CustomerApplicationDto> customerApplicationService, ServiceManager serviceManager)
+        public UserService(ITokenService tokenService, GenericService<ApplicationDto> applicationDtoService, ServiceManager serviceManager)
         {
             _tokenService = tokenService;
             _serviceManager = serviceManager;
-            _customerApplicationService = customerApplicationService;
+            _applicationDtoService = applicationDtoService;
+        }
+
+        public async Task<List<ApplicationDto>> Applications()
+        {
+            return (List<ApplicationDto>)await _applicationDtoService.List();
         }
 
         public async Task<string> Login(UserDto dto)
@@ -25,11 +30,11 @@ namespace Service.Services.Auth
 
         public async Task<string> Register(UserDto dto)
         {
-            await _serviceManager.AuthenticationService.AddAsync(dto);
-            await _customerApplicationService.Add(new CustomerApplicationDto { });
+            if (!await _serviceManager.AuthenticationService.AddAsync(dto))
+                return string.Empty;
 
             return await _tokenService.CreateToken(dto);
         }
-    }
 
+    }
 }

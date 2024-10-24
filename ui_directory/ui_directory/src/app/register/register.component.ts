@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getApplications(): void {
-    this.applicationService.getApplications().subscribe({
+    this.userService.getApplications().subscribe({
       next: (data) => {
         this.applications = data;
       },

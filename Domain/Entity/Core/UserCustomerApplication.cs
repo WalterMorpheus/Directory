@@ -4,8 +4,8 @@ using Domain.Entity.Auth;
 
 namespace Domain.Entity.Core
 {
-    [Table("user_customer")]
-    public class UserCustomer
+    [Table("user_customer_application")]
+    public class UserCustomerApplication
     {
         [Key]
         public int Id { get; set; }
@@ -15,6 +15,9 @@ namespace Domain.Entity.Core
         [Required]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        [Required]
+        public int ApplicationId { get; set; }
+        public Application Application { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         [Required]

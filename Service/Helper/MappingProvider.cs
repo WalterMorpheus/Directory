@@ -1,5 +1,4 @@
 ﻿using Domain.DTOs.External;
-using Domain.DTOs.Interanal;
 using Domain.Entity.Auth;
 using Domain.Entity.Core;
 
@@ -16,13 +15,8 @@ namespace Service.MappingProfiles
                 { typeof(ApplicationDto), typeof(Application) },
                 { typeof(BusinessTypeDto), typeof(BusinessAreaType) },
                 { typeof(UserDto), typeof(User) },
-                { typeof(IntUserDto), typeof(User) },
                 { typeof(CustomerDto), typeof(Customer) },
-                { typeof(IntCustomerDto), typeof(Customer) },
-                { typeof(IntApplicationDto), typeof(Application) },
-                { typeof(CustomerApplicationDto), typeof(CustomerApplication) },
-                { typeof(UserCustomerDto), typeof(UserCustomer) },
-
+                { typeof(UserCustomerApplicationDto), typeof(UserCustomerApplication) },
                 { typeof(UserRoleDto), typeof(UserRole) },
                 { typeof(RoleDto), typeof(Role) }
             };
@@ -35,7 +29,7 @@ namespace Service.MappingProfiles
                 return entityType;
             }
 
-            throw new ArgumentException($"No mapping found for DTO type {dtoType}");
+            throw new InvalidOperationException($"No mapping found for DTO type {dtoType}");
         }
 
         public Type GetEntityType<TDto>()

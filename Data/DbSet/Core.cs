@@ -11,8 +11,7 @@ namespace Data.Extensions
          */
         public DbSet<Application> Applications { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<UserCustomer> UserCustomers { get; set; }
-        public DbSet<CustomerApplication> CustomerApplications { get; set; }
+        public DbSet<UserCustomerApplication> UserCustomerApplications { get; set; }
         public DbSet<BusinessAreaType> BusinessAreaTypes { get; set; }
         public DbSet<BusinessArea> BusinessAreas { get; set; }
         public DbSet<BusinessAreaTypeRelationship> BusinessAreaTypeRelationships { get; set; }

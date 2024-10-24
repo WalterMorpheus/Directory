@@ -4,6 +4,6 @@ namespace Interface
 {
     public interface IAuthenticationService
     {
-        Task<int> AddAsync(UserDto dto);
+        Task<bool> AddAsync(UserDto dto);
     }
 }

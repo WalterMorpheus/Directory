@@ -19,7 +19,6 @@ public class ApplicationController : BaseApiController, IEndpointService<Applica
     {
         return await _service.Add(dto);
     }
-    [AllowAnonymous]
     [HttpGet("list")]
     public async Task<ActionResult<IEnumerable<ApplicationDto>>> ListAsync()
     {

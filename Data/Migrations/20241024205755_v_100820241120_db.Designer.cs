@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241024133258_v_100820241120_db")]
+    [Migration("20241024205755_v_100820241120_db")]
     partial class v_100820241120_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,16 +114,16 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("702807f5-ab8b-43c8-b49e-e17f723a8606"),
-                            ConcurrencyStamp = "693d24b6-b29f-4441-b06a-e84638613395",
+                            AlternateId = new Guid("6845c065-2942-4b6c-ab2b-7ac22396233a"),
+                            ConcurrencyStamp = "1924bca3-d3c7-46d9-b757-8d703e0c7a01",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("7585ce8a-fb0c-460b-9368-b8966b8224c4"),
-                            ConcurrencyStamp = "f2c917b9-d3c6-4547-a36f-8ab42885d1b2",
+                            AlternateId = new Guid("2ff0eb44-4c8f-45b1-99cb-f129757c7424"),
+                            ConcurrencyStamp = "aa6b776a-7c78-49c1-921b-228e292cbb39",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -339,35 +339,35 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            AlternateId = new Guid("fe3119ef-28e2-476a-abaa-4531be0edaf8"),
+                            AlternateId = new Guid("de19fb14-8fb5-4681-bc5a-b909f7829bbc"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4731),
+                            CreatedDate = new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7747),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Mobile",
-                            UpdateDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4733)
+                            UpdateDate = new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7749)
                         },
                         new
                         {
                             Id = 2,
-                            AlternateId = new Guid("d28a8dee-4c13-4cac-8c6d-ec784fefb6e2"),
+                            AlternateId = new Guid("32eaa933-fd94-4800-a424-dedbe3749465"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4735),
+                            CreatedDate = new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7751),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Usage",
-                            UpdateDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4736)
+                            UpdateDate = new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7751)
                         },
                         new
                         {
                             Id = 3,
-                            AlternateId = new Guid("90af8da1-c170-4f31-a53e-e6faecbd5f2f"),
+                            AlternateId = new Guid("79b66c61-ae87-44da-9988-46a037ca2370"),
                             CreatedBy = "api",
-                            CreatedDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737),
+                            CreatedDate = new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7752),
                             DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "On-bill",
-                            UpdateDate = new DateTime(2024, 10, 24, 13, 32, 58, 362, DateTimeKind.Utc).AddTicks(4737)
+                            UpdateDate = new DateTime(2024, 10, 24, 20, 57, 54, 846, DateTimeKind.Utc).AddTicks(7753)
                         });
                 });
 
@@ -560,28 +560,6 @@ namespace Data.Migrations
                     b.ToTable("customer");
                 });
 
-            modelBuilder.Entity("Domain.Entity.Core.CustomerApplication", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("CustomerId", "ApplicationId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.ToTable("customer_application");
-                });
-
             modelBuilder.Entity("Domain.Entity.Core.CustomerBusinessArea", b =>
                 {
                     b.Property<int>("CustomerId")
@@ -683,12 +661,15 @@ namespace Data.Migrations
                     b.ToTable("person_business_area");
                 });
 
-            modelBuilder.Entity("Domain.Entity.Core.UserCustomer", b =>
+            modelBuilder.Entity("Domain.Entity.Core.UserCustomerApplication", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    b.Property<int>("CustomerId")
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationId")
                         .HasColumnType("integer");
 
                     b.Property<string>("CreatedBy")
@@ -698,14 +679,21 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("integer");
 
-                    b.HasKey("UserId", "CustomerId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("user_customer");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("user_customer_application");
                 });
 
             modelBuilder.Entity("Domain.Entity.Auth.IdentityRoleClaim", b =>
@@ -820,25 +808,6 @@ namespace Data.Migrations
                     b.Navigation("ParentType");
                 });
 
-            modelBuilder.Entity("Domain.Entity.Core.CustomerApplication", b =>
-                {
-                    b.HasOne("Domain.Entity.Core.Application", "Application")
-                        .WithMany("CustomerApplications")
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entity.Core.Customer", "Customer")
-                        .WithMany("CustomerApplications")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Application");
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("Domain.Entity.Core.CustomerBusinessArea", b =>
                 {
                     b.HasOne("Domain.Entity.Core.BusinessArea", "BusinessArea")
@@ -888,19 +857,27 @@ namespace Data.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Domain.Entity.Core.UserCustomer", b =>
+            modelBuilder.Entity("Domain.Entity.Core.UserCustomerApplication", b =>
                 {
+                    b.HasOne("Domain.Entity.Core.Application", "Application")
+                        .WithMany("UserCustomerApplications")
+                        .HasForeignKey("ApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entity.Core.Customer", "Customer")
-                        .WithMany("UserCustomers")
+                        .WithMany("UserCustomerApplications")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entity.Auth.User", "User")
-                        .WithMany("UserCustomers")
+                        .WithMany("UserCustomerApplications")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Application");
 
                     b.Navigation("Customer");
 
@@ -914,14 +891,14 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Entity.Auth.User", b =>
                 {
-                    b.Navigation("UserCustomers");
+                    b.Navigation("UserCustomerApplications");
 
                     b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("Domain.Entity.Core.Application", b =>
                 {
-                    b.Navigation("CustomerApplications");
+                    b.Navigation("UserCustomerApplications");
                 });
 
             modelBuilder.Entity("Domain.Entity.Core.BusinessArea", b =>
@@ -948,13 +925,11 @@ namespace Data.Migrations
                 {
                     b.Navigation("BusinessAreas");
 
-                    b.Navigation("CustomerApplications");
-
                     b.Navigation("CustomerBusinessAreas");
 
                     b.Navigation("People");
 
-                    b.Navigation("UserCustomers");
+                    b.Navigation("UserCustomerApplications");
                 });
 
             modelBuilder.Entity("Domain.Entity.Core.Person", b =>

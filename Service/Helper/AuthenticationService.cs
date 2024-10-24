@@ -22,12 +22,14 @@ namespace Service.Helper
             _mapper = mapper;
             _context = context;
         }
-        public async Task<int> AddAsync(UserDto dto)
+        public async Task<bool> AddAsync(UserDto dto)
         {
             if (_context.Users.FirstOrDefault(x => x.UserName == dto.UserName) != null)
                 throw new InvalidOperationException("A user with the same credentials already exists");
 
             var user = _mapper.Map<User>(dto);
+            user.UserCustomerApplications.FirstOrDefault().Application = null;
+
             user.UserName = dto.UserName.ToLower();
             user.Email = dto.Email.ToLower();
 
@@ -39,9 +41,7 @@ namespace Service.Helper
             if (!roleResult.Succeeded) 
                 throw new InvalidOperationException("unable to add user role to authentication");
 
-            _unitOfWork.Equals(roleResult);
-
-            return _context.Users.FirstOrDefault(x => x.UserName == dto.UserName).UserCustomers.FirstOrDefault().Customer.Id;
+           return true;
         }
     }
 }

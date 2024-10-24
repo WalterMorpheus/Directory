@@ -11,6 +11,12 @@ namespace ApiDirectory.Controllers
         {
             _userService = userService;
         }
+        [HttpGet("applications")]
+        public async Task<List<ApplicationDto>> ApplicationsAsync()
+        {
+            return  await _userService.Applications() ;
+        }
+
         [HttpPost("login")]
         public async Task<ActionResult<object>> LoginAsync(UserDto dto) 
         {

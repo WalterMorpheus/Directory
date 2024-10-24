@@ -11,6 +11,6 @@ namespace Domain.Entity.Auth
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public ICollection<UserRole> UserRoles { get; set; }
-        public ICollection<UserCustomer> UserCustomers { get; set; }
+        public ICollection<UserCustomerApplication> UserCustomerApplications { get; set; }
     }
 }

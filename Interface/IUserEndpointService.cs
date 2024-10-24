@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.DTOs.External;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Interface
 {
@@ -7,5 +8,7 @@ namespace Interface
     {
         Task<ActionResult<object>> LoginAsync(TDto dto);
         Task<ActionResult<object>> RegisterAsync(TDto dto);
+        Task<List<ApplicationDto>> ApplicationsAsync();
+
     }
 }
