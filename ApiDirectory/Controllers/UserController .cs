@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDirectory.Controllers
 {
-    public class UserController : BaseApiController, IUserEndpointService<UserDto>
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UserController : ControllerBase, IUserEndpointService<UserDto>
     {
         private readonly IUserService _userService;
         public UserController(IUserService userService)
