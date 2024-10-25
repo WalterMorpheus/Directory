@@ -24,23 +24,23 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.getApplications();
   }
 
   initializeForm(): void {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      customerName: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(32)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
-      applicationAlternateId:[-1]
+      customerName: ['', Validators.required], 
+      applicationAlternateId: [-1, Validators.required]  
     });
 
+    // Update confirmPassword validity when password changes
     this.registerForm.controls['password'].valueChanges.subscribe({
       next: () => this.registerForm.controls['confirmPassword'].updateValueAndValidity()
     });
-
-    this.getApplications();
   }
 
   getApplications(): void {
@@ -62,7 +62,23 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     const values = { ...this.registerForm.value };
-    this.userService.register(values).subscribe({
+
+    // Map form values to match the new User model structure
+    const user = {
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      usercustomerapplications: [
+        {
+          applicationId: values.applicationAlternateId,
+          customer: {
+            name: values.customerName
+          }
+        }
+      ]
+    };
+
+    this.userService.register(user).subscribe({
       next: () => {
         this.router.navigateByUrl('/dashboard');
       },

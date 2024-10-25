@@ -1,47 +1,49 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/" routerLinkActive="active">Directory</a>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Directory</a>
 
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          
-          <ng-container *ngIf="userService.currentUser$ |async">
-            <li class="nav-item" >
-              <a class="nav-link"  routerLink="/business-areas" routerLinkActive="active">Business Areas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  routerLink="/person" routerLinkActive="active">Person</a>
-            </li>
-          </ng-container>
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <ng-container *ngIf="userService.currentUser$ | async as user">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/business-areas" routerLinkActive="active">Business Areas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/person" routerLinkActive="active">Person</a>
+        </li>
+      </ng-container>
+    </ul>
+
+    <!-- Dropdown for logged in user -->
+    <ng-container *ngIf="userService.currentUser$ | async as user">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle text-light text-decoration-none ms-2" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="./assets/user.png" alt="user photo" width="30" height="30" class="rounded-circle me-2">
+          Welcome, {{ user.username }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
         </ul>
+      </div>
+    </ng-container>
 
-        <div class="dropdown" *ngIf="(userService.currentUser$ |async) as user"  dropdown>
-          <img src="{{'./assets/user.png'}}" alt="user photo">
-            <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Welcom {{user.username}}</a>
-            <div class="dropdown-menu" *dropdownMenu>
-              <a class="dropdown-item" routerLink="/profile/edit">Edit Profile</a>
-              <a class="dropdown-item" (click)="logout()">Logout</a>
-            </div>
-        </div>
+    <!-- Login form for unauthenticated user -->
+    <form *ngIf="!(userService.currentUser$ | async)" #loginForm="ngForm" class="d-flex ms-auto" (ngSubmit)="login()" autocomplete="off">
+      <input 
+        name="username" 
+        [(ngModel)]="model.username" 
+        class="form-control me-2" 
+        type="text" 
+        placeholder="Username" 
+        required>
+      <input 
+        name="password" 
+        [(ngModel)]="model.password" 
+        class="form-control me-2" 
+        type="password" 
+        placeholder="Password" 
+        required>
+      <button class="btn btn-success" type="submit">Login</button>
+    </form>
 
-        <form *ngIf="!(userService.currentUser$ |async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
-
-          <input 
-          name="username"
-          [(ngModel)]="model.username"
-          class="form-control me-2" 
-          type="text" 
-          placeholder="Username">
-
-          <input 
-          name="password"
-          [(ngModel)]="model.password"
-          class="form-control me-2" 
-          type="password" 
-          placeholder="Password">
-          
-          <button class="btn btn-success" type="submit">Login</button>
-        </form>
-
-    </div>
-  </nav>
-
+  </div>
+</nav>
